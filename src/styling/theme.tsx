@@ -15,15 +15,15 @@ const theme = extendTheme({
   config,
   semanticTokens: {
     colors: {
-      primary: "#72d4a9",
+      primary: "#00D6A9",
       red: "#dd374a",
       bgPrimary: {
         default: "#f4f7fd",
-        _dark: "#272a2b",
+        _dark: "#1B1F20",
       },
       bgSecondary: {
-        default: "#fffff",
-        _dark: "#272a2b",
+        default: "white",
+        _dark: "#212627",
       },
       gray: "#f1f0f3",
       text: "#0b1014",

@@ -1,26 +1,26 @@
-import {useEffect, useState} from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import {Box, useColorMode, Button} from "@chakra-ui/react";
-import {MoonIcon, SunIcon} from "@chakra-ui/icons";
+import {Flex} from "@chakra-ui/react";
 
-import theme from "./styling/theme";
+import "./styling/app.css";
+import Home from "./components/pages/Home";
+import Header from "./components/Reusable Components/Header";
+import Footer from "./components/Reusable Components/Footer";
 function App() {
-  const [count, setCount] = useState(0);
-
-  const {colorMode, toggleColorMode} = useColorMode();
-
   return (
     <BrowserRouter>
-      {colorMode === "light" && <MoonIcon onClick={toggleColorMode} />}
-      {colorMode === "dark" && <SunIcon onClick={toggleColorMode} />}
+      <Flex paddingTop={""} width="100vw">
+        <Header />
+        <Flex direction={"column"} width="100%">
+          <Routes>
+            <Route element={<Home />} path="/" />
+            <Route element={""} path="/history" />
+          </Routes>
 
-      <Box bg="bgPrimary" height="50px" width={"50px"} />
-      <Box bg="bgSecondary" height="50px" width={"50px"} />
-      <Routes>
-        <Route element={""} path="/" />
-        <Route element={""} path="/history" />
-      </Routes>
+          <Footer />
+        </Flex>
+      </Flex>
     </BrowserRouter>
   );
 }
 export default App;
+1558;
