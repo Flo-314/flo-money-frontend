@@ -1,52 +1,71 @@
-import {Box, Flex, Heading, SimpleGrid, Text} from "@chakra-ui/react";
-import {AiOutlineDollarCircle, AiFillCaretUp} from "react-icons/ai";
+import {Box, Flex, Heading, List, SimpleGrid, Grid, GridItem, Text} from "@chakra-ui/react";
+import {AiOutlineDollarCircle} from "react-icons/ai";
 
+import Graph from "../Reusable Components/Graph";
+import Transaction from "../Reusable Components/Transaction";
+import ListOfTransactions from "../Reusable Components/ListOfTransactions";
 function Home() {
   return (
     <main>
-      <Box
-        bg="bgPrimary"
-        borderRadius={50}
-        height="100%"
-        minHeight={"100vh"}
-        paddingTop="7rem"
-        width="100%"
-      >
-        <Box margin="0 auto" maxWidth="1150px" width="80%">
+      <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
+        <Box marginLeft={"10%"} maxWidth="1000px" width="80%">
           <section id="overview">
-            <Heading>Vista general</Heading>
-            <SimpleGrid columns={2} spacing={10}>
-              <Flex bg="bgSecondary" direction={"column"}>
+            <Heading marginBottom={10}>Vista general</Heading>
+            <Grid
+              gap="10"
+              templateColumns="1fr 1fr"
+              templateRows={"minmax(1px, 300px) minmax(1px, 300px)"}
+            >
+              <GridItem>
                 {/*  green button with your salary   */}
-                <Flex align="center" bg="primary" borderRadius={15} justify="space-around">
+                <Flex
+                  bg="primary"
+                  borderRadius={15}
+                  color="white"
+                  justify="space-around"
+                  paddingY={2}
+                >
                   <Flex align={"center"} gap="2">
                     <AiOutlineDollarCircle color="white" size={50} />
-                    <Text fontSize={20}>Mi saldo</Text>
+                    <Text fontSize={30} fontWeight={500}>
+                      Mi saldo
+                    </Text>
                   </Flex>
-                  <Text fontSize={30} fontWeight={600}>
+                  <Text fontSize={40} fontWeight={600}>
                     {" "}
-                    $1520000
+                    $1.520.000
                   </Text>
                 </Flex>
 
-                <Box>
-                  <Flex justify={"space-between"}>
-                    <Flex>
-                      <Box bg="red" height="20px" width="20px" />
-                      <Text>Puebla</Text>
-                    </Flex>
-                    <Flex>
-                      <AiFillCaretUp color="green" />
-                      <Text>134.0000</Text>
-                    </Flex>
-                  </Flex>
-                  <Flex />
-                </Box>
-              </Flex>
-              <Box bg="bgSecondary">2</Box>
-              <Box bg="bgSecondary">3</Box>
-              <Box bg="bgSecondary">4</Box>
-            </SimpleGrid>
+                {/*   last  two transsactions   */}
+                <Flex
+                  bg="bgSecondary"
+                  borderRadius={20}
+                  direction="column"
+                  gap="5"
+                  marginTop={5}
+                  padding="6"
+                >
+                  <Transaction ammount={134256} isDown={true} name="PUEBLA" />
+                  <Transaction ammount={575} isDown={false} name="nk8 studio" />
+                </Flex>
+              </GridItem>
+              {/*  incomes   */}
+
+              <GridItem borderRadius={20}>
+                <ListOfTransactions />
+              </GridItem>
+
+              {/*  graph   */}
+              <GridItem borderRadius={20}>
+                <Graph />
+              </GridItem>
+              {/*  outcomes   */}
+
+              <GridItem borderRadius={20}>
+                <ListOfTransactions />
+              </GridItem>
+            </Grid>
           </section>
         </Box>
       </Box>

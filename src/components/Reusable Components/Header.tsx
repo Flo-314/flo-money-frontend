@@ -18,7 +18,14 @@ function Header() {
   return (
     <aside>
       <header>
-        <Flex align={"center"} direction={"column"} paddingTop="7rem" width="300px">
+        <Flex
+          align={"center"}
+          bg="bgSecondary"
+          direction={"column"}
+          minH="100vh"
+          paddingTop="7rem"
+          width="300px"
+        >
           <Box>
             <Heading>FLO MONEY</Heading>
             <nav>
@@ -99,7 +106,6 @@ function Header() {
                   <WrapItem
                     bg={selectedPage === "calcular" ? "gray" : "inherit"}
                     borderRadius="15"
-                    color={selectedPage === "calcular" ? "black" : "inherit"}
                     gap={2}
                     paddingLeft={3}
                     paddingRight="10"
