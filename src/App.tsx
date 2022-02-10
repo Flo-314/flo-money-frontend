@@ -3,8 +3,8 @@ import {Flex} from "@chakra-ui/react";
 
 import "./styling/app.css";
 import Home from "./components/pages/Home";
-import Header from "./components/Reusable Components/Header";
-import Footer from "./components/Reusable Components/Footer";
+import Header from "./components/Reusable Components/layout/Header";
+import Footer from "./components/Reusable Components/layout/Footer";
 function App() {
   return (
     <BrowserRouter>

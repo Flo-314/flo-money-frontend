@@ -1,5 +1,4 @@
-import {FC, useState} from "react";
-import {Box, Center, Flex, Heading, Text} from "@chakra-ui/react";
+import {Box, Flex, Text} from "@chakra-ui/react";
 import {Pie} from "react-chartjs-2";
 const data = {
   labels: ["NK8", "NK7", "CACA", "PUEBLA", "FALOPA", "FAFAFA"],
@@ -28,7 +27,7 @@ const data = {
   ],
 };
 
-const Graph = ({dataa}) => {
+const Graph = ({}) => {
   return (
     <Flex bg="bgSecondary" borderRadius="20" direction={"column"} padding="5">
       <Flex direction={"column"} width="100%">

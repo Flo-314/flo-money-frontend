@@ -1,16 +1,18 @@
-import {Box, Flex, Heading, List, SimpleGrid, Grid, GridItem, Text} from "@chakra-ui/react";
+import {Box, Flex, Grid, GridItem, Text} from "@chakra-ui/react";
 import {AiOutlineDollarCircle} from "react-icons/ai";
 
-import Graph from "../Reusable Components/Graph";
-import Transaction from "../Reusable Components/Transaction";
-import ListOfTransactions from "../Reusable Components/ListOfTransactions";
+import Graph from "../Reusable Components/Parts of Components/Graph";
+import Transaction from "../Reusable Components/Parts of Components/Transaction";
+import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";
+import HeaderPage from "../Reusable Components/layout/HeaderPage";
 function Home() {
   return (
     <main>
       <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
         <Box marginLeft={"10%"} maxWidth="1000px" width="80%">
           <section id="overview">
-            <Heading marginBottom={10}>Vista general</Heading>
+            <HeaderPage title="Vista General " />
+
             <Grid
               gap="10"
               templateColumns="1fr 1fr"

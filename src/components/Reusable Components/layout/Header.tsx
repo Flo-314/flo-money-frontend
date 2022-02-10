@@ -8,11 +8,7 @@ import {
   AiOutlineBank,
 } from "react-icons/ai";
 import {useState} from "react";
-import {useColorMode} from "@chakra-ui/react";
-import {MoonIcon, SunIcon} from "@chakra-ui/icons";
 function Header() {
-  const {colorMode, toggleColorMode} = useColorMode();
-
   const [selectedPage, setSelectedPage] = useState("vista general");
 
   return (
@@ -58,9 +54,8 @@ function Header() {
                     </Link>
                   </WrapItem>
                   <WrapItem
-                    bg={selectedPage === "entradas" ? "gray" : "inherit"}
+                    bg={selectedPage === "Ingresos" ? "gray" : "inherit"}
                     borderRadius="15"
-                    color={selectedPage === "entradas" ? "black" : "inherit"}
                     gap={2}
                     paddingLeft={3}
                     paddingRight="10"
@@ -72,18 +67,17 @@ function Header() {
                     </Center>
                     <Link
                       as={RouteLink}
-                      to={"/entries"}
+                      to={"/ingresos"}
                       onClick={() => {
-                        setSelectedPage("entradas");
+                        setSelectedPage("Ingresos");
                       }}
                     >
-                      Entradas
+                      Ingresos
                     </Link>
                   </WrapItem>
                   <WrapItem
-                    bg={selectedPage === "salidas" ? "gray" : "inherit"}
+                    bg={selectedPage === "Egresos" ? "gray" : "inherit"}
                     borderRadius="15"
-                    color={selectedPage === "salidas" ? "black" : "inherit"}
                     gap={2}
                     paddingLeft={3}
                     paddingRight="10"
@@ -95,16 +89,16 @@ function Header() {
                     </Center>
                     <Link
                       as={RouteLink}
-                      to={"/output"}
+                      to={"/egresos"}
                       onClick={() => {
-                        setSelectedPage("salidas");
+                        setSelectedPage("Egresos");
                       }}
                     >
-                      Salidas
+                      Egresos
                     </Link>
                   </WrapItem>
                   <WrapItem
-                    bg={selectedPage === "calcular" ? "gray" : "inherit"}
+                    bg={selectedPage === "Proyecciones" ? "gray" : "inherit"}
                     borderRadius="15"
                     gap={2}
                     paddingLeft={3}
@@ -117,17 +111,13 @@ function Header() {
                     </Center>
                     <Link
                       as={RouteLink}
-                      to={"/calculate"}
+                      to={"/proyecciones"}
                       onClick={() => {
-                        setSelectedPage("calcular");
+                        setSelectedPage("Proyecciones");
                       }}
                     >
-                      Calcular
+                      Proyecciones
                     </Link>
-                  </WrapItem>
-                  <WrapItem>
-                    {colorMode === "light" && <MoonIcon boxSize={10} onClick={toggleColorMode} />}
-                    {colorMode === "dark" && <SunIcon boxSize={10} onClick={toggleColorMode} />}
                   </WrapItem>
                 </Flex>
               </Wrap>

@@ -1,6 +1,6 @@
-import {Box, Flex, Heading, SimpleGrid, Text} from "@chakra-ui/react";
+import {Box, Flex, Text} from "@chakra-ui/react";
 
-import Transaction from "../Reusable Components/Transaction";
+import Transaction from "./Transaction";
 
 function ListOfTransactions() {
   return (
