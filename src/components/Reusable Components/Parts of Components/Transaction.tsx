@@ -11,7 +11,7 @@ const Transaction: FC<Props> = ({name, ammount, isDown}) => {
     <Flex borderBottom={"1px"} borderColor="gray" justify={"space-between"} paddingBottom="5">
       <Flex align={"center"} gap="5">
         <Box bg="red" borderRadius={"full"} height="38px" width="38px" />
-        <Text fontSize="20" fontWeight={500}>
+        <Text fontSize="25" fontWeight={500}>
           {name}
         </Text>
       </Flex>

@@ -55,7 +55,7 @@ function Home() {
               {/*  incomes   */}
 
               <GridItem borderRadius={20}>
-                <ListOfTransactions />
+                <ListOfTransactions title="Ingresos mensuales" />
               </GridItem>
 
               {/*  graph   */}
@@ -65,7 +65,7 @@ function Home() {
               {/*  outcomes   */}
 
               <GridItem borderRadius={20}>
-                <ListOfTransactions />
+                <ListOfTransactions title="Egresos mensuales" />
               </GridItem>
             </Grid>
           </section>
