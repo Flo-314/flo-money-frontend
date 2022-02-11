@@ -1,28 +1,20 @@
 import fetchApi from "./fetchApi";
+import localStoreUser from "./LocalStoreUser";
 
 interface action {
-  type: "getData" | "loadUser" | "login" | "logout";
+  type: "pushUser" | "loadUser" | "login" | "logout";
   user?: user;
 }
 interface user {
-  id: string;
+  userId: string;
   token: string;
   data?: object;
 }
 
 export default function userReducer(user: user, action: action) {
   switch (action.type) {
-    case "getData": {
-      const getUserData = async () => {
-        const userData = await fetchApi(user.token, "user", "GET", user.id);
-        const User = {...user, userData};
-
-        console.log(User);
-
-        return User;
-      };
-
-      return getUserData();
+    case "pushUser": {
+      return action.user;
     }
     case "loadUser": {
       const loggedUserJSON = localStorage.getItem("loggedUser");
@@ -38,6 +30,11 @@ export default function userReducer(user: user, action: action) {
       const user = {token: undefined, id: undefined, data: undefined};
 
       return user;
+    }
+    case "login": {
+      if (action.user) {
+        localStoreUser(action.user);
+      }
     }
     default: {
       throw Error("Unknown action: " + action.type);

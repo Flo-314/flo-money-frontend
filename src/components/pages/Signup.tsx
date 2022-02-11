@@ -60,7 +60,6 @@ function Singup() {
             validationSchema={SignupSchema}
             onSubmit={async (values: Values, {setSubmitting}: FormikHelpers<Values>) => {
               setIsSumbitting(true);
-              console.log(values);
               let body = JSON.stringify({
                 fullname: values.fullname,
                 username: values.username,
@@ -70,7 +69,6 @@ function Singup() {
               });
               let user = await fetchApi("a", "signup", "POST", body);
 
-              console.log(user);
               if (user.errors) {
                 prompt("?este error no debería existir nunca? ? ?? ??");
                 setIsSumbitting(false);
@@ -207,74 +205,3 @@ function Singup() {
 }
 
 export default Singup;
-
-{
-  /* <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
-      <Flex direction={"column"} justify="center" marginLeft={"10%"} maxWidth="1100px" width="80%">
-        <Box>
-          <HeaderPage title="Iniciar Sesion" />
-        </Box>
-        <Box
-          bg="bgSecondary"
-          borderRadius={20}
-          justifySelf={"center"}
-          maxWidth={"600px"}
-          padding="10"
-        >
-          <Formik
-            initialValues={{
-              username: "",
-              password: "",
-            }}
-            onSubmit={(values: Values, {setSubmitting}: FormikHelpers<Values>) => {
-              console.log("a");
-            }}
-          >
-            {({errors, touched}) => (
-              <Form>
-                <FormControl>
-                  <Flex direction="column" gap="5">
-                    <Flex borderBottom={"2px"} borderColor="gray" paddingBottom="5">
-                      <FormLabel fontSize={20} htmlFor="username" minW={"35%"}>
-                        Username:
-                      </FormLabel>
-                      <Input
-                        as={Field}
-                        bg="gray"
-                        fontWeight={700}
-                        id="username"
-                        isRequired={true}
-                        name="username"
-                        placeholder="username"
-                      />
-                    </Flex>
-                    <Flex align="center">
-                      <FormLabel fontSize={20} minW={"35%"}  htmlFor="password" >
-                        Password:
-                      </FormLabel>
-                      <Input
-                        as={Field}
-                      
-                        id="password"
-                        isRequired={true}
-                        name="password"
-                        placeholder="Password"
-                        type="password"
-
-                          bg="gray"
-                          fontWeight={700}
-
-                      />
-                    </Flex>
-                    <Button bg="primary" color="white" fontSize="20" fontWeight={700} type="submit">
-                      Ingresar
-                    </Button>
-                  </Flex>
-                </FormControl>
-              </Form>
-            )}
-          </Formik>
-        </Box>
-      </Flex>
-    </Box> */
-}

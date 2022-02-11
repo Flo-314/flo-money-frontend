@@ -3,6 +3,8 @@ const fetchApi = async (token: string, route: string, action: string, body: any)
     const Authorization = "Bearer " + token;
     let link = "http://localhost:4000/api/" + route;
 
+    body = JSON.stringify(body);
+
     const ping = await fetch(link, {
       method: action,
       body,

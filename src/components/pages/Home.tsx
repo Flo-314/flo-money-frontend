@@ -6,16 +6,11 @@ import Graph from "../Reusable Components/Parts of Components/Graph";
 import Transaction from "../Reusable Components/Parts of Components/Transaction";
 import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
-import {UserContext, UserDispatchContext} from "../../helper functions/UserContext";
+import {UserContext} from "../../helper functions/UserContext";
 function Home() {
-  const dispatch = useContext(UserDispatchContext);
   const user = useContext(UserContext);
 
-  console.log(user);
-
-  useEffect(() => {
-    dispatch({type: "loadUser"});
-  }, [dispatch]);
+  useEffect(() => {}, []);
 
   return (
     <main>

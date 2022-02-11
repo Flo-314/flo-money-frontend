@@ -1,9 +1,10 @@
 import {FormControl, FormLabel, Button, Input, Flex, Box, Text} from "@chakra-ui/react";
 import {Formik, Field, Form, FormikHelpers} from "formik";
-import {useReducer, useState} from "react";
+import {useContext, useReducer, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 import fetchApi from "../../helper functions/fetchApi";
-import localStoreUser from "../../helper functions/LocalStoreUser";
+import {UserContext, UserDispatchContext} from "../../helper functions/UserContext";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
 
 interface Values {
@@ -14,6 +15,9 @@ interface Values {
 function Login() {
   const [isSumbitting, setIsSumbitting] = useState(false);
   const [error, setError] = useState("");
+  const dispatch = useContext(UserDispatchContext);
+  const user = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
@@ -41,12 +45,13 @@ function Login() {
 
               if (user.message === "Auth Failed") {
                 setError("User or Password invalid");
+                setIsSumbitting(false);
               } else {
-                localStoreUser(user);
-                //setuser(user)
-                window.location.href = "/";
+                setIsSumbitting(false);
+
+                dispatch({user, type: "login"});
+                navigate("/");
               }
-              setIsSumbitting(false);
             }}
           >
             <Form>
