@@ -1,6 +1,6 @@
-import {FormControl, FormLabel, Button, Input, Flex, Box} from "@chakra-ui/react";
+import {FormControl, FormLabel, Button, Input, Flex, Box, Text} from "@chakra-ui/react";
 import {Formik, Field, Form, FormikHelpers} from "formik";
-import {useState} from "react";
+import {useReducer, useState} from "react";
 
 import fetchApi from "../../helper functions/fetchApi";
 import localStoreUser from "../../helper functions/LocalStoreUser";
@@ -13,6 +13,7 @@ interface Values {
 
 function Login() {
   const [isSumbitting, setIsSumbitting] = useState(false);
+  const [error, setError] = useState("");
 
   return (
     <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
@@ -34,10 +35,12 @@ function Login() {
             }}
             onSubmit={async (values: Values, {setSubmitting}: FormikHelpers<Values>) => {
               setIsSumbitting(true);
+              setError("");
               let body = JSON.stringify({username: values.username, password: values.password});
               let user = await fetchApi("a", "login", "POST", body);
 
               if (user.message === "Auth Failed") {
+                setError("User or Password invalid");
               } else {
                 localStoreUser(user);
                 //setuser(user)
@@ -78,6 +81,11 @@ function Login() {
                       type="password"
                     />
                   </Flex>
+                  {error && (
+                    <Text color="red" fontSize={20} fontWeight={600}>
+                      {error}
+                    </Text>
+                  )}
                   <Button
                     bg="primary"
                     color="white"

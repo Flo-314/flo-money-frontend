@@ -72,7 +72,7 @@ function Singup() {
 
               console.log(user);
               if (user.errors) {
-                prompt("????????????????????");
+                prompt("?este error no debería existir nunca? ? ?? ??");
                 setIsSumbitting(false);
               } else {
                 localStoreUser(user);

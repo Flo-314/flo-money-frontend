@@ -1,11 +1,22 @@
 import {Box, Flex, Grid, GridItem, Text} from "@chakra-ui/react";
 import {AiOutlineDollarCircle} from "react-icons/ai";
+import {useContext, useEffect} from "react";
 
 import Graph from "../Reusable Components/Parts of Components/Graph";
 import Transaction from "../Reusable Components/Parts of Components/Transaction";
 import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
+import {UserContext, UserDispatchContext} from "../../helper functions/UserContext";
 function Home() {
+  const dispatch = useContext(UserDispatchContext);
+  const user = useContext(UserContext);
+
+  console.log(user);
+
+  useEffect(() => {
+    dispatch({type: "loadUser"});
+  }, [dispatch]);
+
   return (
     <main>
       <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
