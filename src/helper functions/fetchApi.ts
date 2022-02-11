@@ -1,11 +1,7 @@
-const fetchApi = async (token, route, action, body) => {
+const fetchApi = async (token: string, route: string, action: string, body: any) => {
   try {
     const Authorization = "Bearer " + token;
-    let link = "http://localhost:4000/api";
-
-    if (route) {
-      link += "/" + route;
-    }
+    let link = "http://localhost:4000/api/" + route;
 
     const ping = await fetch(link, {
       method: action,

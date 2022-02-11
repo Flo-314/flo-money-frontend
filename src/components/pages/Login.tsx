@@ -1,6 +1,9 @@
-import {FormControl, FormLabel, Button, Input, Flex, Box, Heading} from "@chakra-ui/react";
+import {FormControl, FormLabel, Button, Input, Flex, Box} from "@chakra-ui/react";
 import {Formik, Field, Form, FormikHelpers} from "formik";
+import {useState} from "react";
 
+import fetchApi from "../../helper functions/fetchApi";
+import localStoreUser from "../../helper functions/LocalStoreUser";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
 
 interface Values {
@@ -9,6 +12,8 @@ interface Values {
 }
 
 function Login() {
+  const [isSumbitting, setIsSumbitting] = useState(false);
+
   return (
     <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
       <Flex direction={"column"} justify="center" marginLeft={"10%"} maxWidth="1100px" width="80%">
@@ -27,50 +32,65 @@ function Login() {
               username: "",
               password: "",
             }}
-            onSubmit={(values: Values, {setSubmitting}: FormikHelpers<Values>) => {
-              console.log("a");
+            onSubmit={async (values: Values, {setSubmitting}: FormikHelpers<Values>) => {
+              setIsSumbitting(true);
+              let body = JSON.stringify({username: values.username, password: values.password});
+              let user = await fetchApi("a", "login", "POST", body);
+
+              if (user.message === "Auth Failed") {
+              } else {
+                localStoreUser(user);
+                //setuser(user)
+                window.location.href = "/";
+              }
+              setIsSumbitting(false);
             }}
           >
-            {({errors, touched}) => (
-              <Form>
-                <FormControl>
-                  <Flex direction="column" gap="5">
-                    <Flex borderBottom={"2px"} borderColor="gray" paddingBottom="5">
-                      <FormLabel fontSize={20} htmlFor="username" minW={"30%"}>
-                        Username:
-                      </FormLabel>
-                      <Input
-                        as={Field}
-                        bg="gray"
-                        fontWeight={700}
-                        id="username"
-                        isRequired={true}
-                        name="username"
-                        placeholder="username"
-                      />
-                    </Flex>
-                    <Flex align="center">
-                      <FormLabel fontSize={20} htmlFor="password" minW={"30%"}>
-                        Password:
-                      </FormLabel>
-                      <Input
-                        as={Field}
-                        bg="gray"
-                        fontWeight={700}
-                        id="password"
-                        isRequired={true}
-                        name="password"
-                        placeholder="Password"
-                        type="password"
-                      />
-                    </Flex>
-                    <Button bg="primary" color="white" fontSize="20" fontWeight={700} type="submit">
-                      Ingresar
-                    </Button>
+            <Form>
+              <FormControl>
+                <Flex direction="column" gap="5">
+                  <Flex borderBottom={"2px"} borderColor="gray" paddingBottom="5">
+                    <FormLabel fontSize={20} htmlFor="username" minW={"30%"}>
+                      Username:
+                    </FormLabel>
+                    <Input
+                      as={Field}
+                      bg="gray"
+                      fontWeight={700}
+                      id="username"
+                      isRequired={true}
+                      name="username"
+                      placeholder="username"
+                    />
                   </Flex>
-                </FormControl>
-              </Form>
-            )}
+                  <Flex align="center">
+                    <FormLabel fontSize={20} htmlFor="password" minW={"30%"}>
+                      Password:
+                    </FormLabel>
+                    <Input
+                      as={Field}
+                      bg="gray"
+                      fontWeight={700}
+                      id="password"
+                      isRequired={true}
+                      name="password"
+                      placeholder="Password"
+                      type="password"
+                    />
+                  </Flex>
+                  <Button
+                    bg="primary"
+                    color="white"
+                    fontSize="20"
+                    fontWeight={700}
+                    isLoading={isSumbitting === true ? true : false}
+                    type="submit"
+                  >
+                    Ingresar
+                  </Button>
+                </Flex>
+              </FormControl>
+            </Form>
           </Formik>
         </Box>
       </Flex>

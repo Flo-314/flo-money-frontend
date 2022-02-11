@@ -2,8 +2,11 @@ import {FormControl, FormLabel, Button, Input, Text} from "@chakra-ui/react";
 import {Formik, Field, Form, FormikHelpers} from "formik";
 import * as Yup from "yup";
 import {Box, Flex} from "@chakra-ui/react";
+import {useState} from "react";
 
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
+import localStoreUser from "../../helper functions/LocalStoreUser";
+import fetchApi from "../../helper functions/fetchApi";
 
 interface Values {
   fullname: string;
@@ -31,6 +34,8 @@ const SignupSchema = Yup.object().shape({
 });
 
 function Singup() {
+  const [isSumbitting, setIsSumbitting] = useState(false);
+
   return (
     <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
       <Flex direction={"column"} justify="center" marginLeft={"10%"} maxWidth="1100px" width="80%">
@@ -53,8 +58,28 @@ function Singup() {
               confpassword: "",
             }}
             validationSchema={SignupSchema}
-            onSubmit={(values: Values, {setSubmitting}: FormikHelpers<Values>) => {
-              console.log("a");
+            onSubmit={async (values: Values, {setSubmitting}: FormikHelpers<Values>) => {
+              setIsSumbitting(true);
+              console.log(values);
+              let body = JSON.stringify({
+                fullname: values.fullname,
+                username: values.username,
+                email: values.email,
+                password: values.password,
+                confpassword: values.confpassword,
+              });
+              let user = await fetchApi("a", "signup", "POST", body);
+
+              console.log(user);
+              if (user.errors) {
+                prompt("????????????????????");
+                setIsSumbitting(false);
+              } else {
+                localStoreUser(user);
+                //setuser(user)
+                window.location.href = "/login";
+              }
+              setIsSumbitting(false);
             }}
           >
             {({errors, touched}) => (
@@ -160,7 +185,14 @@ function Singup() {
                         {errors.confpassword}
                       </Text>
                     ) : null}
-                    <Button bg="primary" color="white" fontSize={20} fontWeight="700" type="submit">
+                    <Button
+                      bg="primary"
+                      color="white"
+                      fontSize={20}
+                      fontWeight="700"
+                      isLoading={isSumbitting === true ? true : false}
+                      type="submit"
+                    >
                       Submit
                     </Button>
                   </Flex>
