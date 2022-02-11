@@ -119,6 +119,8 @@ function Header() {
                       Proyecciones
                     </Link>
                   </WrapItem>
+                  <a href="singup">singup</a>
+                  <a href="login">login</a>
                 </Flex>
               </Wrap>
             </nav>

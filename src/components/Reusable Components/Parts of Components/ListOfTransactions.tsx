@@ -33,19 +33,16 @@ const ListOfTransactions: FC<Props> = ({title}) => {
         </Text>
       </Box>
       <Flex direction={"column"} gap="5">
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
-        <Transaction ammount={575} isDown={false} name="nk8 studio" />
+        <Transaction ammount={575} isDown={true} name="Servicios" />
+        <Transaction ammount={5.25} isDown={false} name="Trabajo" />
+        <Transaction ammount={8000} isDown={true} name="libros" />
+        <Transaction ammount={575} isDown={true} name="Servicios" />
+        <Transaction ammount={575} isDown={true} name="comida" />
+        <Transaction ammount={575} isDown={true} name="Servicios" />
+        <Transaction ammount={5.25} isDown={false} name="Trabajo" />
+        <Transaction ammount={8000} isDown={true} name="libros" />
+        <Transaction ammount={575} isDown={true} name="Servicios" />
+        <Transaction ammount={575} isDown={true} name="comida" />
       </Flex>
     </Flex>
   );

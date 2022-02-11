@@ -9,12 +9,12 @@ function Home() {
   return (
     <main>
       <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
-        <Box marginLeft={"10%"} maxWidth="1000px" width="80%">
+        <Box marginLeft={"10%"} maxWidth="1100px" width="80%">
           <section id="overview">
             <HeaderPage title="Vista General " />
 
             <Grid
-              gap="10"
+              gap="20"
               templateColumns="1fr 1fr"
               templateRows={"minmax(1px, 300px) minmax(1px, 300px)"}
             >
@@ -48,8 +48,11 @@ function Home() {
                   marginTop={5}
                   padding="6"
                 >
-                  <Transaction ammount={134256} isDown={true} name="PUEBLA" />
-                  <Transaction ammount={575} isDown={false} name="nk8 studio" />
+                  <Text borderBottom={"1px"} borderColor="gray" fontSize="20">
+                    Ultimas transacciones:
+                  </Text>
+                  <Transaction ammount={575} isDown={true} name="Servicios" />
+                  <Transaction ammount={5.25} isDown={false} name="Trabajo" />
                 </Flex>
               </GridItem>
               {/*  incomes   */}

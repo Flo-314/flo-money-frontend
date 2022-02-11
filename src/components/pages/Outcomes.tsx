@@ -1,9 +1,5 @@
-import {Box, Flex, Grid, GridItem, Text} from "@chakra-ui/react";
-import {AiOutlineDollarCircle} from "react-icons/ai";
+import {Box, Grid, GridItem} from "@chakra-ui/react";
 
-import Graph from "../Reusable Components/Parts of Components/Graph";
-import Transaction from "../Reusable Components/Parts of Components/Transaction";
-import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
 
 function Outcomes() {
