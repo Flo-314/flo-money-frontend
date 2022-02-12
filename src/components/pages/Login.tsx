@@ -40,7 +40,7 @@ function Login() {
             onSubmit={async (values: Values, {setSubmitting}: FormikHelpers<Values>) => {
               setIsSumbitting(true);
               setError("");
-              let body = JSON.stringify({username: values.username, password: values.password});
+              let body = {username: values.username, password: values.password};
               let user = await fetchApi("a", "login", "POST", body);
 
               if (user.message === "Auth Failed") {
@@ -48,8 +48,7 @@ function Login() {
                 setIsSumbitting(false);
               } else {
                 setIsSumbitting(false);
-
-                dispatch({user, type: "login"});
+                dispatch({type: "login", user});
                 navigate("/");
               }
             }}

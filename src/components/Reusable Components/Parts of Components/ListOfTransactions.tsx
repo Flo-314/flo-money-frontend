@@ -4,8 +4,19 @@ import {FC} from "react";
 import Transaction from "./Transaction";
 interface Props {
   title: string;
+  transactions?: any;
 }
-const ListOfTransactions: FC<Props> = ({title}) => {
+const sumOfPayments = (category: any) => {
+  let sum = 0;
+
+  category.forEach((payment) => {
+    sum += payment.ammmount;
+  });
+};
+
+const ListOfTransactions: FC<Props> = ({title, transactions}) => {
+  console.log(transactions);
+
   return (
     <Flex
       bg="bgSecondary"
@@ -33,16 +44,10 @@ const ListOfTransactions: FC<Props> = ({title}) => {
         </Text>
       </Box>
       <Flex direction={"column"} gap="5">
-        <Transaction ammount={575} isDown={true} name="Servicios" />
-        <Transaction ammount={5.25} isDown={false} name="Trabajo" />
-        <Transaction ammount={8000} isDown={true} name="libros" />
-        <Transaction ammount={575} isDown={true} name="Servicios" />
-        <Transaction ammount={575} isDown={true} name="comida" />
-        <Transaction ammount={575} isDown={true} name="Servicios" />
-        <Transaction ammount={5.25} isDown={false} name="Trabajo" />
-        <Transaction ammount={8000} isDown={true} name="libros" />
-        <Transaction ammount={575} isDown={true} name="Servicios" />
-        <Transaction ammount={575} isDown={true} name="comida" />
+        {transactions &&
+          transactions.map((category, index) => {
+            return <Transaction key={index} ammount={0} isDown={false} name={category.name} />;
+          })}
       </Flex>
     </Flex>
   );

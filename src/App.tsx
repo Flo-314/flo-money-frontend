@@ -26,6 +26,7 @@ function App() {
   const initialUser = {token: undefined, id: undefined, data: undefined};
   const [user, dispatch] = useReducer(userReducer, initialUser);
 
+  console.log(user);
   useEffect(() => {
     if (localStorage.loggedUser && !user.token) {
       dispatch({type: "loadUser"});
@@ -40,8 +41,6 @@ function App() {
       })();
     }
   }, [user]);
-
-  console.log(user);
 
   return (
     <BrowserRouter>

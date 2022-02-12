@@ -34,6 +34,8 @@ export default function userReducer(user: user, action: action) {
     case "login": {
       if (action.user) {
         localStoreUser(action.user);
+
+        return action.user;
       }
     }
     default: {
