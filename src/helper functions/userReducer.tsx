@@ -1,4 +1,3 @@
-import fetchApi from "./fetchApi";
 import localStoreUser from "./LocalStoreUser";
 
 interface action {

@@ -14,7 +14,6 @@ import {UserContext, UserDispatchContext} from "../../../helper functions/UserCo
 function Header() {
   const [selectedPage, setSelectedPage] = useState("vista general");
 
-  const dispatch = useContext(UserDispatchContext);
   const user = useContext(UserContext);
 
   return (

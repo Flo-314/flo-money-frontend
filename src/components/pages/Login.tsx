@@ -1,6 +1,6 @@
 import {FormControl, FormLabel, Button, Input, Flex, Box, Text} from "@chakra-ui/react";
 import {Formik, Field, Form, FormikHelpers} from "formik";
-import {useContext, useReducer, useState} from "react";
+import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import fetchApi from "../../helper functions/fetchApi";

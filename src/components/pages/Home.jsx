@@ -1,6 +1,6 @@
-import {Box, Center, Flex, Grid, GridItem, Spinner, Text} from "@chakra-ui/react";
+import {Box, Flex, Grid, GridItem, Spinner, Text} from "@chakra-ui/react";
 import {AiOutlineDollarCircle} from "react-icons/ai";
-import {useContext, useEffect} from "react";
+import {useContext} from "react";
 
 import Graph from "../Reusable Components/Parts of Components/Graph";
 import Transaction from "../Reusable Components/Parts of Components/Transaction";
@@ -10,7 +10,17 @@ import {UserContext} from "../../helper functions/UserContext";
 function Home() {
   const user = useContext(UserContext);
 
-  /*  user.data.data.incomes */
+  let lastIncome = {};
+  let lastOutcome = {};
+  let incomeCategory, outcomeCategory;
+
+  if (user?.data) {
+    lastIncome = user.data.data.incomes[0].payments[0];
+    lastOutcome = user.data.data.outcomes[0].payments[0];
+    incomeCategory = user.data.data.incomes[0].name;
+    outcomeCategory = user.data.data.outcomes[0].name;
+  }
+
   return (
     <main>
       {user.data ? (
@@ -54,11 +64,19 @@ function Home() {
                     marginTop={5}
                     padding="6"
                   >
-                    <Text borderBottom={"1px"} borderColor="gray" fontSize="20">
+                    <Text borderBottom={"1px"} borderColor="gray" fontSize="25" fontWeight={600}>
                       Ultimas transacciones:
                     </Text>
-                    <Transaction ammount={575} isDown={true} name="Servicios" />
-                    <Transaction ammount={5.25} isDown={false} name="Trabajo" />
+                    <Transaction
+                      ammount={lastOutcome.ammount}
+                      isDown={true}
+                      name={outcomeCategory}
+                    />
+                    <Transaction
+                      ammount={lastIncome.ammount}
+                      isDown={false}
+                      name={incomeCategory}
+                    />
                   </Flex>
                 </GridItem>
                 {/*  incomes   */}
@@ -77,7 +95,10 @@ function Home() {
                 {/*  outcomes   */}
 
                 <GridItem borderRadius={20}>
-                  <ListOfTransactions title="Egresos mensuales" />
+                  <ListOfTransactions
+                    title="Egresos mensuales"
+                    transactions={user.data.data.outcomes}
+                  />
                 </GridItem>
               </Grid>
             </section>

@@ -15,8 +15,6 @@ const sumOfPayments = (category: any) => {
 };
 
 const ListOfTransactions: FC<Props> = ({title, transactions}) => {
-  console.log(transactions);
-
   return (
     <Flex
       bg="bgSecondary"
