@@ -15,14 +15,8 @@ import Signup from "./components/pages/Signup";
 import {UserContext, UserDispatchContext} from "./helper functions/UserContext";
 import userReducer from "./helper functions/userReducer";
 import fetchApi from "./helper functions/fetchApi";
-
+import {user} from "./helper functions/interfaces";
 function App() {
-  interface user {
-    userId: string;
-    token: string;
-    data?: object;
-  }
-
   const initialUser = {token: undefined, id: undefined, data: undefined};
   const [user, dispatch] = useReducer(userReducer, initialUser);
 
@@ -33,13 +27,16 @@ function App() {
     if (user.token && !user.data) {
       const getUserData = (async () => {
         const body = {_id: user.userId};
-        const data = await fetchApi(user.token, "user", "POST", body);
-        const User = {...user, data};
+        let data = await fetchApi(user.token, "user", "POST", body);
+
+        data = data.data;
+        const User: user = {...user, data};
 
         dispatch({type: "pushUser", user: User});
       })();
     }
   }, [user]);
+  console.log(user);
 
   return (
     <BrowserRouter>

@@ -14,11 +14,11 @@ function Home() {
   let lastOutcome = {};
   let incomeCategory, outcomeCategory;
 
-  if (user?.data) {
-    lastIncome = user.data.data.incomes[0].payments[0];
-    lastOutcome = user.data.data.outcomes[0].payments[0];
-    incomeCategory = user.data.data.incomes[0].name;
-    outcomeCategory = user.data.data.outcomes[0].name;
+  if (user?.data?.data) {
+    lastIncome = user.data.incomes[0].payments[0];
+    lastOutcome = user.data.outcomes[0].payments[0];
+    incomeCategory = user.data.incomes[0].name;
+    outcomeCategory = user.data.outcomes[0].name;
   }
 
   return (
@@ -36,24 +36,6 @@ function Home() {
               >
                 <GridItem>
                   {/*  green button with your salary   */}
-                  <Flex
-                    bg="primary"
-                    borderRadius={15}
-                    color="white"
-                    justify="space-around"
-                    paddingY={2}
-                  >
-                    <Flex align={"center"} gap="2">
-                      <AiOutlineDollarCircle color="white" size={50} />
-                      <Text fontSize={30} fontWeight={500}>
-                        Mi saldo
-                      </Text>
-                    </Flex>
-                    <Text fontSize={40} fontWeight={600}>
-                      {" "}
-                      $1.520.000
-                    </Text>
-                  </Flex>
 
                   {/*   last  two transsactions   */}
                   <Flex
@@ -84,7 +66,7 @@ function Home() {
                 <GridItem borderRadius={20}>
                   <ListOfTransactions
                     title="Ingresos mensuales"
-                    transactions={user.data.data.incomes}
+                    transactions={user.data?.incomes}
                   />
                 </GridItem>
 
@@ -97,7 +79,7 @@ function Home() {
                 <GridItem borderRadius={20}>
                   <ListOfTransactions
                     title="Egresos mensuales"
-                    transactions={user.data.data.outcomes}
+                    transactions={user.data?.outcomes}
                   />
                 </GridItem>
               </Grid>

@@ -3,6 +3,7 @@ import {Formik, Field, Form, FormikHelpers} from "formik";
 import * as Yup from "yup";
 import {Box, Flex} from "@chakra-ui/react";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
 import localStoreUser from "../../helper functions/LocalStoreUser";
@@ -35,6 +36,7 @@ const SignupSchema = Yup.object().shape({
 
 function Singup() {
   const [isSumbitting, setIsSumbitting] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
@@ -73,9 +75,7 @@ function Singup() {
                 prompt("?este error no debería existir nunca? ? ?? ??");
                 setIsSumbitting(false);
               } else {
-                localStoreUser(user);
-                //setuser(user)
-                window.location.href = "/login";
+                navigate("/login");
               }
               setIsSumbitting(false);
             }}

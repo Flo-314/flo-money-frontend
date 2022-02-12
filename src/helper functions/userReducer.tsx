@@ -1,13 +1,9 @@
 import localStoreUser from "./LocalStoreUser";
+import {user} from "./interfaces";
 
 interface action {
   type: "pushUser" | "loadUser" | "login" | "logout";
   user?: user;
-}
-interface user {
-  userId: string;
-  token: string;
-  data?: object;
 }
 
 export default function userReducer(user: user, action: action) {
@@ -32,7 +28,9 @@ export default function userReducer(user: user, action: action) {
     }
     case "login": {
       if (action.user) {
-        localStoreUser(action.user);
+        const User = action.user;
+
+        localStoreUser(User);
 
         return action.user;
       }

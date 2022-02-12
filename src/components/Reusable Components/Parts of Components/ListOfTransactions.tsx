@@ -6,13 +6,6 @@ interface Props {
   title: string;
   transactions?: any;
 }
-const sumOfPayments = (category: any) => {
-  let sum = 0;
-
-  category.forEach((payment) => {
-    sum += payment.ammmount;
-  });
-};
 
 const ListOfTransactions: FC<Props> = ({title, transactions}) => {
   return (
