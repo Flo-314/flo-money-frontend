@@ -1,6 +1,9 @@
 import {Box, Flex, Text} from "@chakra-ui/react";
 import {FC} from "react";
 
+import sumOfPayments from "../../../helper functions/sumOfPayments";
+import {category} from "../../../helper functions/interfaces";
+
 import Transaction from "./Transaction";
 interface Props {
   title: string;
@@ -24,7 +27,7 @@ const ListOfTransactions: FC<Props> = ({title, transactions}) => {
         },
       }}
       direction={"column"}
-      maxH="280px"
+      maxH="100%"
       overflow={"scroll"}
       overflowX="hidden"
       padding="5"
@@ -36,8 +39,15 @@ const ListOfTransactions: FC<Props> = ({title, transactions}) => {
       </Box>
       <Flex direction={"column"} gap="5">
         {transactions &&
-          transactions.map((category, index) => {
-            return <Transaction key={index} ammount={0} isDown={false} name={category.name} />;
+          transactions.map((category: category, index: number) => {
+            return (
+              <Transaction
+                key={index}
+                ammount={sumOfPayments(category)}
+                isDown={false}
+                name={category.name}
+              />
+            );
           })}
       </Flex>
     </Flex>

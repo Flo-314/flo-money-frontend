@@ -1,17 +1,11 @@
 import {extendTheme} from "@chakra-ui/react";
 import {createBreakpoints} from "@chakra-ui/theme-tools";
 
-const breakpoints = createBreakpoints({
-  mobile: "375px",
-  tablet: "1050px",
-  desktop: "1920px",
-});
 const config = {
   initialColorMode: "dark",
   useSystemColorMode: false,
 };
 const theme = extendTheme({
-  breakpoints,
   config,
   semanticTokens: {
     colors: {

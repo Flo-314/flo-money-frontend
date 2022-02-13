@@ -1,5 +1,4 @@
 import {Box, Flex, Grid, GridItem, Spinner, Text} from "@chakra-ui/react";
-import {AiOutlineDollarCircle} from "react-icons/ai";
 import {useContext} from "react";
 
 import Graph from "../Reusable Components/Parts of Components/Graph";
@@ -14,7 +13,7 @@ function Home() {
   let lastOutcome = {};
   let incomeCategory, outcomeCategory;
 
-  if (user?.data?.data) {
+  if (user.data) {
     lastIncome = user.data.incomes[0].payments[0];
     lastOutcome = user.data.outcomes[0].payments[0];
     incomeCategory = user.data.incomes[0].name;
@@ -31,8 +30,8 @@ function Home() {
 
               <Grid
                 gap="20"
-                templateColumns="1fr 1fr"
-                templateRows={"minmax(1px, 300px) minmax(1px, 300px)"}
+                templateColumns={{"2xl": "1fr 1fr", sm: "1fr"}}
+                templateRows={"minmax(1px, 350px) minmax(1px, 350px)"}
               >
                 <GridItem>
                   {/*  green button with your salary   */}
@@ -43,6 +42,7 @@ function Home() {
                     borderRadius={20}
                     direction="column"
                     gap="5"
+                    height="100%"
                     marginTop={5}
                     padding="6"
                   >
@@ -71,8 +71,8 @@ function Home() {
                 </GridItem>
 
                 {/*  graph   */}
-                <GridItem borderRadius={20}>
-                  <Graph />
+                <GridItem borderRadius={20} height="100%">
+                  <Graph incomes={user.data?.incomes} outcomes={user.data?.outcomes} />
                 </GridItem>
                 {/*  outcomes   */}
 

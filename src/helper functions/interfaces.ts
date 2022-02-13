@@ -7,7 +7,7 @@ export interface payment {
 export interface category {
   name: string;
   _id: string;
-  payments: payment[];
+  payments: Array<payment>;
 }
 
 export interface data {

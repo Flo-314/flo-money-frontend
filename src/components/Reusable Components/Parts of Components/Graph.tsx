@@ -1,22 +1,44 @@
 import {Box, Flex, Text} from "@chakra-ui/react";
+import {FC, useEffect, useState} from "react";
 import {Pie} from "react-chartjs-2";
-const data = {
-  labels: ["Entradas", "Salidas"],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [120, 95],
-      backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
-      borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
-      borderWidth: 2,
-    },
-  ],
-};
 
-const Graph = ({}) => {
+import {category} from "../../../helper functions/interfaces";
+import sumOfCategory from "../../../helper functions/sumOfCategory";
+interface Props {
+  incomes: Array<category>;
+  outcomes: Array<category>;
+}
+const Graph: FC<Props> = ({incomes, outcomes}) => {
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const createData = () => {
+      if (outcomes && incomes) {
+        let sumOfOutcomes = sumOfCategory(outcomes);
+        let sumOfIncomes = sumOfCategory(incomes);
+
+        const data = {
+          labels: ["Entradas", "Salidas"],
+          datasets: [
+            {
+              data: [sumOfIncomes, sumOfOutcomes],
+              backgroundColor: ["red", "green"],
+              borderColor: ["red", "green"],
+              borderWidth: 2,
+            },
+          ],
+        };
+
+        setData(data);
+      }
+    };
+
+    createData();
+  }, [incomes, outcomes]);
+
   return (
-    <Flex bg="bgSecondary" borderRadius="20" direction={"column"} padding="5">
-      <Flex direction={"column"} width="100%">
+    <Flex bg="bgSecondary" borderRadius="20" direction={"column"} height="100%" padding="5">
+      <Flex direction={"column"} gap="4" width="100%">
         <Text fontSize={30} fontWeight={600} paddingBottom="3">
           Estadistica
         </Text>

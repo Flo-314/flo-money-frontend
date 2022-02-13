@@ -16,6 +16,8 @@ import {UserContext, UserDispatchContext} from "./helper functions/UserContext";
 import userReducer from "./helper functions/userReducer";
 import fetchApi from "./helper functions/fetchApi";
 import {user} from "./helper functions/interfaces";
+import sumOfPayments from "./helper functions/sumOfPayments";
+import {mockOfPayments} from "./tests/mock";
 function App() {
   const initialUser = {token: undefined, id: undefined, data: undefined};
   const [user, dispatch] = useReducer(userReducer, initialUser);
@@ -36,7 +38,6 @@ function App() {
       })();
     }
   }, [user]);
-  console.log(user);
 
   return (
     <BrowserRouter>
