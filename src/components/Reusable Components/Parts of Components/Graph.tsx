@@ -4,6 +4,7 @@ import {Pie} from "react-chartjs-2";
 
 import {category} from "../../../helper functions/interfaces";
 import sumOfCategory from "../../../helper functions/sumOfCategory";
+import sumOfPayments from "../../../helper functions/sumOfPayments";
 interface Props {
   arrayOfCategories1: Array<category>;
   arrayOfCategories2?: Array<category>;
@@ -38,7 +39,7 @@ const Graph: FC<Props> = ({arrayOfCategories1, arrayOfCategories2, isOverview}) 
           labels: [],
           datasets: [
             {
-              data: [1200, 1250, 2400, 2403, 10],
+              data: [],
               backgroundColor: [],
               borderColor: [],
               borderWidth: 2,
@@ -47,11 +48,10 @@ const Graph: FC<Props> = ({arrayOfCategories1, arrayOfCategories2, isOverview}) 
         };
 
         arrayOfCategories1.forEach((category) => {
-          const color = "#" + Math.floor(Math.random() * 16777215).toString(16);
-
           data.labels.push(category.name);
-          data.datasets[0].backgroundColor.push(color);
-          data.datasets[0].borderColor.push(color);
+          data.datasets[0].backgroundColor.push(category.color);
+          data.datasets[0].borderColor.push(category.color);
+          data.datasets[0].data.push(sumOfPayments(category));
         });
         setData(data);
       }

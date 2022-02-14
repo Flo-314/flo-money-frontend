@@ -1,5 +1,6 @@
 import {Box, Flex, Grid, GridItem, Spinner, Text} from "@chakra-ui/react";
 import {useContext} from "react";
+import {AiOutlineDollarCircle} from "react-icons/ai";
 
 import Graph from "../Reusable Components/Parts of Components/Graph";
 import Transaction from "../Reusable Components/Parts of Components/Transaction";
@@ -9,6 +10,8 @@ import {UserContext} from "../../helper functions/UserContext";
 import {user} from "../../helper functions/interfaces";
 function Home() {
   const user: user = useContext(UserContext);
+
+  console.log(user);
 
   return (
     <main>
@@ -24,36 +27,49 @@ function Home() {
                 templateRows={"minmax(1px, 350px) minmax(1px, 350px)"}
               >
                 <GridItem>
-                  {/*  green button with your salary   */}
-
-                  {/*   last  two transsactions   */}
-                  <Flex
-                    bg="bgSecondary"
-                    borderRadius={20}
-                    direction="column"
-                    gap="5"
-                    height="100%"
-                    marginTop={5}
-                    padding="6"
-                  >
-                    <Text borderBottom={"1px"} borderColor="gray" fontSize="25" fontWeight={600}>
-                      Ultimas transacciones:
-                    </Text>
-                    <Transaction
-                      ammount={user.data.outcomes[0].payments[0].ammount}
-                      isDown={true}
-                      name={user.data.outcomes[0].name}
-                    />
-                    <Transaction
-                      ammount={user.data.outcomes[0].payments[0].ammount}
-                      isDown={false}
-                      name={user.data.incomes[0].name}
-                    />
-                    <Transaction
-                      ammount={user.data.outcomes[0].payments[0].ammount}
-                      isDown={true}
-                      name={user.data.outcomes[0].name}
-                    />
+                  <Flex borderRadius={20} direction="column" gap="5" height="100%">
+                    <Flex
+                      align={"center"}
+                      bg="primary"
+                      borderRadius={20}
+                      justify="space-around"
+                      paddingX=""
+                      paddingY={5}
+                    >
+                      <Flex align="center" color="white" gap="3">
+                        <AiOutlineDollarCircle size={50} />
+                        <Text fontSize={30} fontWeight={500}>
+                          Mi saldo
+                        </Text>
+                      </Flex>
+                      <Text color="white" fontSize={40} fontWeight="700">
+                        $134.000
+                      </Text>
+                    </Flex>
+                    <Flex
+                      bg="bgSecondary"
+                      borderRadius={20}
+                      direction="column"
+                      gap="5"
+                      paddingTop="5"
+                      paddingX="5"
+                    >
+                      <Text borderBottom={"1px"} borderColor="gray" fontSize="30" fontWeight={600}>
+                        Ultimas transacciones:
+                      </Text>
+                      <Transaction
+                        ammount={user.data.outcomes[0].payments[1].ammount}
+                        color={user?.data?.outcomes[0].color}
+                        isDown={true}
+                        name={user.data.outcomes[0].payments[1].name}
+                      />
+                      <Transaction
+                        ammount={user.data.incomes[0].payments[1].ammount}
+                        color={user?.data?.incomes[0].color}
+                        isDown={false}
+                        name={user.data.incomes[0].payments[1].name}
+                      />
+                    </Flex>
                   </Flex>
                 </GridItem>
                 {/*  incomes   */}

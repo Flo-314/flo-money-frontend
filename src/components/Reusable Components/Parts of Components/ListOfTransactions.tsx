@@ -2,7 +2,7 @@ import {Box, Flex, Text, Select} from "@chakra-ui/react";
 import {FC} from "react";
 
 import sumOfPayments from "../../../helper functions/sumOfPayments";
-import {category, payment} from "../../../helper functions/interfaces";
+import {category} from "../../../helper functions/interfaces";
 
 import Transaction from "./Transaction";
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
   setSelectedCategory?: any;
   categories?: category[];
   payments?: category;
+  color?: string;
 }
 const ListOfTransactions: FC<Props> = ({
   title,
@@ -21,8 +22,6 @@ const ListOfTransactions: FC<Props> = ({
   categories,
   payments,
 }) => {
-  console.log(payments);
-
   return (
     <Flex
       bg="bgSecondary"
@@ -74,7 +73,8 @@ const ListOfTransactions: FC<Props> = ({
               <Transaction
                 key={index}
                 ammount={sumOfPayments(category)}
-                isDown={false}
+                color={category.color}
+                isDown={!category.isIncome}
                 name={category.name}
               />
             );
@@ -87,6 +87,7 @@ const ListOfTransactions: FC<Props> = ({
               <Transaction
                 key={index}
                 ammount={payment.ammount}
+                color={categories[category].color}
                 isDown={false}
                 name={payment.name}
               />
@@ -98,7 +99,8 @@ const ListOfTransactions: FC<Props> = ({
               <Transaction
                 key={index}
                 ammount={payment.ammount}
-                isDown={false}
+                color={payment.color}
+                isDown={!payment.isIncome}
                 name={payment.name}
               />
             );

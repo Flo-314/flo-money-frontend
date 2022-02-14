@@ -5,12 +5,13 @@ interface Props {
   name: string;
   ammount: number;
   isDown: boolean;
+  color: string;
 }
-const Transaction: FC<Props> = ({name, ammount, isDown}) => {
+const Transaction: FC<Props> = ({name, ammount, isDown, color}) => {
   return (
     <Flex borderBottom={"1px"} borderColor="gray" justify={"space-between"} paddingBottom="5">
       <Flex align={"center"} gap="5">
-        <Box bg="red" borderRadius={"full"} height="38px" width="38px" />
+        <Box bg={color} borderRadius={"full"} height="38px" width="38px" />
         <Text fontSize="25" fontWeight={500}>
           {name}
         </Text>

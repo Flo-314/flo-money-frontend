@@ -23,7 +23,7 @@ function UserNav() {
   return (
     <nav>
       <Flex gap="5">
-        <Flex align={"center"} gap="1">
+        <Flex align={"center"} gap="1" justify={"center"}>
           <Menu>
             <MenuButton
               as={Button}
