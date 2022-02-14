@@ -16,16 +16,16 @@ import {UserContext, UserDispatchContext} from "./helper functions/UserContext";
 import userReducer from "./helper functions/userReducer";
 import fetchApi from "./helper functions/fetchApi";
 import {user} from "./helper functions/interfaces";
-import sumOfPayments from "./helper functions/sumOfPayments";
-import {mockOfPayments} from "./tests/mock";
 function App() {
-  const initialUser = {token: undefined, id: undefined, data: undefined};
+  const initialUser: user = {token: undefined, userId: undefined, data: undefined};
   const [user, dispatch] = useReducer(userReducer, initialUser);
 
   useEffect(() => {
+    //si hay usuario en local storage pero no en state
     if (localStorage.loggedUser && !user.token) {
       dispatch({type: "loadUser"});
     }
+    // si hay usuario en state pero no fetcheo la data
     if (user.token && !user.data) {
       const getUserData = (async () => {
         const body = {_id: user.userId};

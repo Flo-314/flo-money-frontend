@@ -6,19 +6,9 @@ import Transaction from "../Reusable Components/Parts of Components/Transaction"
 import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
 import {UserContext} from "../../helper functions/UserContext";
+import {user} from "../../helper functions/interfaces";
 function Home() {
-  const user = useContext(UserContext);
-
-  let lastIncome = {};
-  let lastOutcome = {};
-  let incomeCategory, outcomeCategory;
-
-  if (user.data) {
-    lastIncome = user.data.incomes[0].payments[0];
-    lastOutcome = user.data.outcomes[0].payments[0];
-    incomeCategory = user.data.incomes[0].name;
-    outcomeCategory = user.data.outcomes[0].name;
-  }
+  const user: user = useContext(UserContext);
 
   return (
     <main>
@@ -50,36 +40,45 @@ function Home() {
                       Ultimas transacciones:
                     </Text>
                     <Transaction
-                      ammount={lastOutcome.ammount}
+                      ammount={user.data.outcomes[0].payments[0].ammount}
                       isDown={true}
-                      name={outcomeCategory}
+                      name={user.data.outcomes[0].name}
                     />
                     <Transaction
-                      ammount={lastIncome.ammount}
+                      ammount={user.data.outcomes[0].payments[0].ammount}
                       isDown={false}
-                      name={incomeCategory}
+                      name={user.data.incomes[0].name}
+                    />
+                    <Transaction
+                      ammount={user.data.outcomes[0].payments[0].ammount}
+                      isDown={true}
+                      name={user.data.outcomes[0].name}
                     />
                   </Flex>
                 </GridItem>
                 {/*  incomes   */}
 
-                <GridItem borderRadius={20}>
+                <GridItem>
                   <ListOfTransactions
+                    arrayOfCategories={user.data?.incomes}
                     title="Ingresos mensuales"
-                    transactions={user.data?.incomes}
                   />
                 </GridItem>
 
                 {/*  graph   */}
                 <GridItem borderRadius={20} height="100%">
-                  <Graph incomes={user.data?.incomes} outcomes={user.data?.outcomes} />
+                  <Graph
+                    arrayOfCategories1={user.data?.incomes}
+                    arrayOfCategories2={user.data?.outcomes}
+                    isOverview={true}
+                  />
                 </GridItem>
                 {/*  outcomes   */}
 
                 <GridItem borderRadius={20}>
                   <ListOfTransactions
+                    arrayOfCategories={user.data?.outcomes}
                     title="Egresos mensuales"
-                    transactions={user.data?.outcomes}
                   />
                 </GridItem>
               </Grid>
@@ -91,7 +90,7 @@ function Home() {
           <Text fontSize="50" fontWeight={700}>
             Loading...
           </Text>
-          <Spinner boxSize={20} color="green" thickness={15} />
+          <Spinner boxSize={20} color="green" thickness={"15"} />
         </Flex>
       )}
     </main>

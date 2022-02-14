@@ -1,7 +1,8 @@
 export interface payment {
   ammount: number;
   isMonthly: boolean;
-  toFrom: string;
+  name: string;
+  date: Date;
   _id: string;
 }
 export interface category {
@@ -16,7 +17,7 @@ export interface data {
   projections: category;
 }
 export interface user {
-  userId: string;
-  token: string;
+  userId?: string;
+  token?: string;
   data?: data;
 }
