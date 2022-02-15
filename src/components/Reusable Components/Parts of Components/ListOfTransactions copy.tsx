@@ -23,6 +23,8 @@ const ListOfTransactions: FC<Props> = ({
   setSelectedCategory,
   payments,
 }) => {
+  const [selectedCategory, SetSelectedCategory] = useState<number>(0);
+
   return (
     <Flex
       bg="bgSecondary"

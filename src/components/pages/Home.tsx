@@ -106,7 +106,7 @@ function Home() {
           <Text fontSize="50" fontWeight={700}>
             Loading...
           </Text>
-          <Spinner boxSize={20} color="green" thickness={"15"} />
+          <Spinner boxSize={20} color="primary" thickness={"15"} />
         </Flex>
       )}
     </main>

@@ -1,7 +1,7 @@
 import {Box, Flex, Grid, GridItem, Text, Spinner} from "@chakra-ui/react";
 import {useContext, useEffect, useState} from "react";
 
-import {category, user, payment} from "../../helper functions/interfaces";
+import {category, user} from "../../helper functions/interfaces";
 import {UserContext} from "../../helper functions/UserContext";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
 import Graph from "../Reusable Components/Parts of Components/Graph";
@@ -16,10 +16,10 @@ function Incomes() {
   useEffect(() => {
     if (user.data) {
       setIncomes(user.data.incomes);
-      let payments: category = {name: "", _id: "", payments: []};
+      let payments: category = {name: "", _id: "", color: "", payments: []};
 
       user.data.incomes.forEach((category: category) => {
-        category.payments.forEach((payment: payment, index) => {
+        category.payments.forEach((payment: any) => {
           let newPayment = payment;
 
           newPayment.isIncome = category.isIncome;
