@@ -1,28 +1,26 @@
-import {Box, Flex, Text, Select, Button} from "@chakra-ui/react";
-import {FC} from "react";
-import {EditIcon, SmallAddIcon} from "@chakra-ui/icons";
+import {Box, Flex, Text, Select} from "@chakra-ui/react";
+import {FC, useState} from "react";
 
 import sumOfPayments from "../../../helper functions/sumOfPayments";
-import {category} from "../../../helper functions/interfaces";
+import {category, payment} from "../../../helper functions/interfaces";
 
 import Transaction from "./Transaction";
 interface Props {
   title: string;
+  category?: category;
   arrayOfCategories?: category[];
-  category?: number;
-  categories?: category[];
-  setSelectedCategory?: any;
-  payments?: category;
-  color?: string;
+  isSelected?: boolean;
+  isEditable?: boolean;
 }
 const ListOfTransactions: FC<Props> = ({
   title,
-  arrayOfCategories,
   category,
-  categories,
-  setSelectedCategory,
-  payments,
+  arrayOfCategories,
+  isSelected,
+  isEditable,
 }) => {
+  const [selectedCategory, SetSelectedCategory] = useState<number>(0);
+
   return (
     <Flex
       bg="bgSecondary"
@@ -51,14 +49,14 @@ const ListOfTransactions: FC<Props> = ({
           {title}
         </Text>
 
-        {setSelectedCategory && (
+        {isSelected && (
           <Select
             onChange={(e) => {
-              setSelectedCategory(e.target.value);
+              SetSelectedCategory(+e.target.value);
             }}
           >
-            {categories &&
-              categories.map((category: category, index: number) => {
+            {arrayOfCategories &&
+              arrayOfCategories.map((category: category, index: number) => {
                 return (
                   <option key={index} value={index}>
                     {category.name}
@@ -68,42 +66,54 @@ const ListOfTransactions: FC<Props> = ({
           </Select>
         )}
       </Box>
-      <Flex direction={"column"} gap="5">
-        {arrayOfCategories &&
-          arrayOfCategories.map((category: category, index: number) => {
-            return (
-              <Transaction
-                key={index}
-                ammount={sumOfPayments(category)}
-                color={category.color}
-                isDown={!category.isIncome}
-                name={category.name}
-              />
-            );
-          })}
 
+      {/*  CUANDO ES POR CATEGORIA. */}
+
+      <Flex direction={"column"} gap="5">
         {category &&
-          categories &&
-          categories[category].payments.map((payment, index) => {
-            return (
-              <Transaction
-                key={index}
-                ammount={payment.ammount}
-                color={categories[category].color}
-                isDown={false}
-                name={payment.name}
-              />
-            );
-          })}
-        {payments &&
-          payments.payments.map((payment, index) => {
+          category.payments.map((payment: payment, index) => {
             return (
               <Transaction
                 key={index}
                 ammount={payment.ammount}
                 color={payment.color}
-                isDown={!payment.isIncome}
+                isEditable={isEditable}
+                isIncome={category.isIncome}
                 name={payment.name}
+              />
+            );
+          })}
+
+        {/*  CUANDO ES ARRAY DE TODAS LAS CATEGORIAS. */}
+
+        {arrayOfCategories &&
+          !isSelected &&
+          arrayOfCategories.map((category: category, index) => {
+            return (
+              <Transaction
+                key={index}
+                ammount={sumOfPayments(category)}
+                color={category.color}
+                isEditable={isEditable}
+                isIncome={category.isIncome}
+                name={category.name}
+              />
+            );
+          })}
+
+        {/*  CUANDO HAY SELECT DE CATEGORIAS */}
+
+        {arrayOfCategories &&
+          isSelected &&
+          arrayOfCategories[selectedCategory]?.payments.map((payments: payment, index) => {
+            return (
+              <Transaction
+                key={index}
+                ammount={payments.ammount}
+                color={arrayOfCategories[selectedCategory].color}
+                isEditable={isEditable}
+                isIncome={arrayOfCategories[selectedCategory].isIncome}
+                name={payments.name}
               />
             );
           })}

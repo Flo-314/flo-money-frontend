@@ -7,11 +7,10 @@ import HeaderPage from "../Reusable Components/layout/HeaderPage";
 import Graph from "../Reusable Components/Parts of Components/Graph";
 import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";
 
-function Outcomes() {
+function Incomes() {
   const user: user = useContext(UserContext);
-  const [selectedCategory, SetSelectedCategory] = useState<number>(0);
   const [payments, setpayments] = useState<category>();
-  const [incomes, setIncomes] = useState<Array<category>>([]);
+  const [outcomes, setIncomes] = useState<Array<category>>([]);
 
   useEffect(() => {
     if (user.data) {
@@ -33,11 +32,11 @@ function Outcomes() {
 
   return (
     <main>
-      {user.data ? (
+      {user.data && (
         <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
           <Box marginLeft={"10%"} maxWidth="1000px" width="80%">
             <section id="overview">
-              <HeaderPage title="Ingresos" />
+              <HeaderPage title="Egresos" />
 
               <Grid
                 gap="20"
@@ -45,37 +44,43 @@ function Outcomes() {
                 templateRows={"minmax(1px, 350px) minmax(1px, 350px)"}
               >
                 <GridItem borderRadius={20} height="100%">
-                  <ListOfTransactions arrayOfCategories={incomes} title="Categorías" />
+                  <ListOfTransactions arrayOfCategories={outcomes} title="Categorías" />
                 </GridItem>
 
                 <GridItem borderRadius={20}>
                   <ListOfTransactions
-                    categories={incomes}
-                    category={selectedCategory}
-                    setSelectedCategory={SetSelectedCategory}
-                    title={"salidas de "}
+                    arrayOfCategories={outcomes}
+                    isSelected={true}
+                    title={"Salidas de "}
                   />
                 </GridItem>
                 <GridItem>
-                  <Graph arrayOfCategories1={incomes} />
+                  <Graph arrayOfCategories1={outcomes} />
                 </GridItem>
                 <GridItem borderRadius={20}>
-                  <ListOfTransactions payments={payments} title={"Todas las salidas"} />
+                  <ListOfTransactions category={payments} title={"Todas las salidas"} />
                 </GridItem>
               </Grid>
             </section>
           </Box>
         </Box>
-      ) : (
+      )}
+      {!user.data && user.token ? (
         <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
           <Text fontSize="50" fontWeight={700}>
             Loading...
           </Text>
-          <Spinner boxSize={20} color="green" thickness={"15"} />
+          <Spinner boxSize={200} color="green" thickness={30} />
+        </Flex>
+      ) : (
+        <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
+          <Text fontSize="50" fontWeight={700}>
+            Please Log-In or Sign Up
+          </Text>
         </Flex>
       )}
     </main>
   );
 }
 
-export default Outcomes;
+export default Incomes;

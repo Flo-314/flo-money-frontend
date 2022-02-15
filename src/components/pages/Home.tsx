@@ -15,7 +15,7 @@ function Home() {
 
   return (
     <main>
-      {user.data ? (
+      {user.data && (
         <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
           <Box marginLeft={"10%"} maxWidth="1100px" width="80%">
             <section id="overview">
@@ -60,13 +60,13 @@ function Home() {
                       <Transaction
                         ammount={user.data.outcomes[0].payments[1].ammount}
                         color={user?.data?.outcomes[0].color}
-                        isDown={true}
+                        isIncome={false}
                         name={user.data.outcomes[0].payments[1].name}
                       />
                       <Transaction
                         ammount={user.data.incomes[0].payments[1].ammount}
                         color={user?.data?.incomes[0].color}
-                        isDown={false}
+                        isIncome={true}
                         name={user.data.incomes[0].payments[1].name}
                       />
                     </Flex>
@@ -101,12 +101,19 @@ function Home() {
             </section>
           </Box>
         </Box>
-      ) : (
+      )}
+      {!user.data && user.token ? (
         <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
           <Text fontSize="50" fontWeight={700}>
             Loading...
           </Text>
-          <Spinner boxSize={20} color="primary" thickness={"15"} />
+          <Spinner boxSize={200} color="green" thickness={30} />
+        </Flex>
+      ) : (
+        <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
+          <Text fontSize="50" fontWeight={700}>
+            Please Log-In or Sign Up
+          </Text>
         </Flex>
       )}
     </main>

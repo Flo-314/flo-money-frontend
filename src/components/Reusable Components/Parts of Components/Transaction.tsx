@@ -1,13 +1,16 @@
-import {Box, Flex, Text} from "@chakra-ui/react";
+import {Box, Button, Flex, Text} from "@chakra-ui/react";
 import {FC} from "react";
 import {AiFillCaretDown, AiFillCaretUp} from "react-icons/ai";
+import {EditIcon, SmallAddIcon} from "@chakra-ui/icons";
+
 interface Props {
   name: string;
   ammount: number;
-  isDown: boolean;
+  isIncome?: boolean;
   color: string;
+  isEditable?: boolean;
 }
-const Transaction: FC<Props> = ({name, ammount, isDown, color}) => {
+const Transaction: FC<Props> = ({name, ammount, isIncome, color, isEditable}) => {
   return (
     <Flex borderBottom={"1px"} borderColor="gray" justify={"space-between"} paddingBottom="5">
       <Flex align={"center"} gap="5">
@@ -17,7 +20,7 @@ const Transaction: FC<Props> = ({name, ammount, isDown, color}) => {
         </Text>
       </Flex>
       <Flex align={"center"} gap="2">
-        {isDown ? (
+        {!isIncome ? (
           <AiFillCaretDown color="red" size={20} />
         ) : (
           <AiFillCaretUp color="green" size={20} />
@@ -25,9 +28,53 @@ const Transaction: FC<Props> = ({name, ammount, isDown, color}) => {
         <Text fontSize={30} fontWeight={600}>
           ${ammount}
         </Text>
+        {isEditable && (
+          <Button bg="bgPrimary">
+            <EditIcon />
+          </Button>
+        )}
       </Flex>
     </Flex>
   );
 };
 
 export default Transaction;
+
+/*
+edit payment
+  -api(id, ammount,name,ismonthly)
+    agarras la id, fetcheas un PUT con el nuevo payment.
+  -state(isIncome, id)
+    -is income?
+      -if true
+        -buscar en incomes
+          -buscar en cada categoria
+            -remplazar por nuevo state
+
+      -if false
+        -buscar en outcomes
+          -buscar en cada categoria
+            -remplazar por nuevo state
+
+
+
+edit category
+  -api(id, name,color)
+    agarras la id, fetcheas un PUT con el nuevo payment.
+  -state(isIncome, id)
+    -is income?
+      -if true
+        -buscar en incomes
+          -buscar en cada categoria
+            -remplazar por nuevo state
+
+      -if false
+        -buscar en outcomes
+          -buscar en cada categoria
+            -remplazar por nuevo state
+
+
+
+
+
+*/
