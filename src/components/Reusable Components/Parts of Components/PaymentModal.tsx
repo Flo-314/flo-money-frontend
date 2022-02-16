@@ -14,6 +14,7 @@ import {FC, useContext, useState} from "react";
 import fetchApi from "../../../helper functions/fetchApi";
 import {category, payment} from "../../../helper functions/interfaces";
 import {UserContext, UserDispatchContext} from "../../../helper functions/UserContext";
+import {user} from "../../../helper functions/interfaces";
 
 interface Props {
   isEdit?: boolean;
@@ -94,6 +95,15 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
                   } catch (err) {
                     return err;
                   }
+                }
+                if (user.token) {
+                  const body = {_id: user.userId};
+                  let data = await fetchApi(user.token, "user", "POST", body);
+
+                  data = data.data;
+                  const User: user = {...user, data};
+
+                  dispatch({type: "pushUser", user: User});
                 }
                 setIsSumbitting(false);
                 onClose();

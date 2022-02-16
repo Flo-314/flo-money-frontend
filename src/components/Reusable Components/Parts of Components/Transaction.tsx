@@ -14,7 +14,7 @@ interface Props {
   color: string;
   payment?: payment;
   category?: category;
-  isEditable: boolean;
+  isEditable?: boolean;
 }
 const Transaction: FC<Props> = ({
   name,
