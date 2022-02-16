@@ -14,8 +14,17 @@ interface Props {
   color: string;
   payment?: payment;
   category?: category;
+  isEditable: boolean;
 }
-const Transaction: FC<Props> = ({name, ammount, isIncome, color, payment, category}) => {
+const Transaction: FC<Props> = ({
+  name,
+  ammount,
+  isIncome,
+  color,
+  payment,
+  category,
+  isEditable,
+}) => {
   return (
     <Flex borderBottom={"1px"} borderColor="gray" justify={"space-between"} paddingBottom="5">
       <Flex align={"center"} gap="5">
@@ -33,10 +42,10 @@ const Transaction: FC<Props> = ({name, ammount, isIncome, color, payment, catego
         <Text fontSize={30} fontWeight={600}>
           ${ammount}
         </Text>
-        {payment && category && (
+        {payment && category && isEditable && (
           <PaymentModal category={category} isEdit={true} payment={payment} />
         )}
-        {category && !payment && (
+        {category && !payment && isEditable && (
           <CategoryModal category={category} isEdit={true} isIncome={isIncome} />
         )}
       </Flex>

@@ -13,7 +13,6 @@ interface Props {
   arrayOfCategories?: category[];
   isSelected?: boolean;
   isAddible?: boolean;
-  isIncome?: boolean;
 }
 const ListOfTransactions: FC<Props> = ({
   title,
@@ -21,7 +20,6 @@ const ListOfTransactions: FC<Props> = ({
   arrayOfCategories,
   isSelected,
   isAddible,
-  isIncome,
 }) => {
   const [selectedCategory, SetSelectedCategory] = useState<number>(0);
 
@@ -73,7 +71,7 @@ const ListOfTransactions: FC<Props> = ({
           </Select>
         )}
         {isAddible && arrayOfCategories && !isSelected ? (
-          <CategoryModal isEdit={false} isIncome={isIncome} />
+          <CategoryModal isEdit={false} isIncome={isAddible} />
         ) : null}
         {isAddible && arrayOfCategories && isSelected ? (
           <PaymentModal category={arrayOfCategories[selectedCategory]} isEdit={false} />
@@ -91,6 +89,7 @@ const ListOfTransactions: FC<Props> = ({
                 ammount={payment.ammount}
                 category={category}
                 color={payment.color}
+                isEditable={isAddible}
                 isIncome={category.isIncome}
                 name={payment.name}
                 payment={payment}
@@ -109,6 +108,7 @@ const ListOfTransactions: FC<Props> = ({
                 ammount={sumOfPayments(category)}
                 category={category}
                 color={category.color}
+                isEditable={isAddible}
                 isIncome={category.isIncome}
                 name={category.name}
               />
@@ -126,6 +126,7 @@ const ListOfTransactions: FC<Props> = ({
                 ammount={payments.ammount}
                 category={arrayOfCategories[selectedCategory]}
                 color={arrayOfCategories[selectedCategory].color}
+                isEditable={isAddible}
                 isIncome={arrayOfCategories[selectedCategory].isIncome}
                 name={payments.name}
                 payment={payments}
