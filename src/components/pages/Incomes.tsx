@@ -44,14 +44,20 @@ function Incomes() {
                 templateRows={"minmax(1px, 350px) minmax(1px, 350px)"}
               >
                 <GridItem borderRadius={20} height="100%">
-                  <ListOfTransactions arrayOfCategories={incomes} title="Categorías" />
+                  <ListOfTransactions
+                    arrayOfCategories={incomes}
+                    isAddible={true}
+                    isEditable={true}
+                    title="Categorías"
+                  />
                 </GridItem>
 
                 <GridItem borderRadius={20}>
                   <ListOfTransactions
                     arrayOfCategories={incomes}
+                    isAddible={true}
+                    isEditable={true}
                     isSelected={true}
-                    title={"Entradas de "}
                   />
                 </GridItem>
                 <GridItem>
