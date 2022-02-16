@@ -14,6 +14,8 @@ import {FC, useContext, useState} from "react";
 import fetchApi from "../../../helper functions/fetchApi";
 import {category} from "../../../helper functions/interfaces";
 import {UserContext, UserDispatchContext} from "../../../helper functions/UserContext";
+import {user} from "../../../helper functions/interfaces";
+
 interface Props {
   isEdit?: boolean;
   isIncome?: boolean;
@@ -25,6 +27,7 @@ interface Values {
 }
 const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
   const [isSumbitting, setIsSumbitting] = useState(false);
+  const [deleteSumbitting, setDeleteSumbitting] = useState(false);
   const {isOpen, onOpen, onClose} = useDisclosure();
   const dispatch = useContext(UserDispatchContext);
   const user = useContext(UserContext);
@@ -92,6 +95,15 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
                     return err;
                   }
                 }
+                if (user.token) {
+                  const body = {_id: user.userId};
+                  let data = await fetchApi(user.token, "user", "POST", body);
+
+                  data = data.data;
+                  const User: user = {...user, data};
+
+                  dispatch({type: "pushUser", user: User});
+                }
                 setIsSumbitting(false);
                 onClose();
               }}
@@ -108,7 +120,7 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
                 <Button
                   bg="primary"
                   color="white"
-                  colorScheme="blue"
+                  disabled={deleteSumbitting === true ? true : false}
                   fontSize="20"
                   fontWeight={700}
                   isLoading={isSumbitting === true ? true : false}
@@ -117,7 +129,43 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
                 >
                   {isEdit ? "Guardar" : "Crear"}
                 </Button>
-                <Button disabled={isSumbitting === true ? true : false} onClick={onClose}>
+                {isEdit && user.token ? (
+                  <Button
+                    bg="red"
+                    color="white"
+                    disabled={isSumbitting === true ? true : false}
+                    fontSize="20"
+                    fontWeight={700}
+                    isLoading={deleteSumbitting === true ? true : false}
+                    mr={3}
+                    onClick={async () => {
+                      setDeleteSumbitting(true);
+                      try {
+                        await fetchApi(user.token, "category", "DELETE", {_id: category?._id});
+                      } catch (err) {
+                        return err;
+                      }
+
+                      if (user.token) {
+                        const body = {_id: user.userId};
+                        let data = await fetchApi(user.token, "user", "POST", body);
+
+                        data = data.data;
+                        const User: user = {...user, data};
+
+                        dispatch({type: "pushUser", user: User});
+                      }
+                      setDeleteSumbitting(false);
+                      onClose();
+                    }}
+                  >
+                    Delete
+                  </Button>
+                ) : null}
+                <Button
+                  disabled={isSumbitting || deleteSumbitting === true ? true : false}
+                  onClick={onClose}
+                >
                   Cancelar
                 </Button>
               </Form>

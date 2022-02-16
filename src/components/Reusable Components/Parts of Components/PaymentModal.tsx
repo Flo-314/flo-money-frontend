@@ -29,6 +29,8 @@ interface Values {
 }
 const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
   const [isSumbitting, setIsSumbitting] = useState(false);
+  const [deleteSumbitting, setDeleteSumbitting] = useState(false);
+
   const {isOpen, onOpen, onClose} = useDisclosure();
   const dispatch = useContext(UserDispatchContext);
   const user = useContext(UserContext);
@@ -132,7 +134,7 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
                 <Button
                   bg="primary"
                   color="white"
-                  colorScheme="blue"
+                  disabled={deleteSumbitting === true ? true : false}
                   fontSize="20"
                   fontWeight={700}
                   isLoading={isSumbitting === true ? true : false}
@@ -141,7 +143,44 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
                 >
                   {isEdit ? "Guardar" : "Crear"}
                 </Button>
-                <Button disabled={isSumbitting === true ? true : false} onClick={onClose}>
+                {isEdit && user.token ? (
+                  <Button
+                    bg="red"
+                    color="white"
+                    disabled={isSumbitting === true ? true : false}
+                    fontSize="20"
+                    fontWeight={700}
+                    isLoading={deleteSumbitting === true ? true : false}
+                    mr={3}
+                    onClick={async () => {
+                      setDeleteSumbitting(true);
+                      try {
+                        await fetchApi(user.token, "payment", "DELETE", {_id: payment?._id});
+                      } catch (err) {
+                        return err;
+                      }
+
+                      if (user.token) {
+                        const body = {_id: user.userId};
+                        let data = await fetchApi(user.token, "user", "POST", body);
+
+                        data = data.data;
+                        const User: user = {...user, data};
+
+                        dispatch({type: "pushUser", user: User});
+                      }
+                      setDeleteSumbitting(false);
+                      onClose();
+                    }}
+                  >
+                    Delete
+                  </Button>
+                ) : null}
+
+                <Button
+                  disabled={isSumbitting || deleteSumbitting === true ? true : false}
+                  onClick={onClose}
+                >
                   Cancelar
                 </Button>
               </Form>

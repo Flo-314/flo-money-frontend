@@ -58,16 +58,16 @@ function Home() {
                         Ultimas transacciones:
                       </Text>
                       <Transaction
-                        ammount={user.data.outcomes[0].payments[1].ammount}
-                        color={user?.data?.outcomes[0].color}
+                        ammount={user.data.outcomes[0]?.payments[1].ammount}
+                        color={user.data.outcomes[0]?.color}
                         isIncome={false}
-                        name={user.data.outcomes[0].payments[1].name}
+                        name={user.data.outcomes[0]?.payments[1].name}
                       />
                       <Transaction
-                        ammount={user.data.incomes[0].payments[1].ammount}
-                        color={user?.data?.incomes[0].color}
+                        ammount={user.data.incomes[0]?.payments[1].ammount}
+                        color={user.data.incomes[0]?.color}
                         isIncome={true}
-                        name={user.data.incomes[0].payments[1].name}
+                        name={user.data.incomes[0]?.payments[1].name}
                       />
                     </Flex>
                   </Flex>
