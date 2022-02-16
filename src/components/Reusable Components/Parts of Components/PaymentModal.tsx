@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import {Formik, Field, Form} from "formik";
 import {FC, useContext, useState} from "react";
+import {useToast} from "@chakra-ui/react";
 
 import fetchApi from "../../../helper functions/fetchApi";
 import {category, payment} from "../../../helper functions/interfaces";
@@ -34,6 +35,17 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const dispatch = useContext(UserDispatchContext);
   const user = useContext(UserContext);
+  const toast = useToast({
+    position: "bottom-left",
+    status: "success",
+    duration: 3500,
+    isClosable: true,
+    containerStyle: {
+      marginLeft: "2em",
+      marginBottom: "2em",
+    },
+  });
+
   let initialValues;
 
   if (payment) {
@@ -80,6 +92,7 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
 
                   try {
                     await fetchApi(user.token, "payment", "POST", body);
+                    toast({title: "Pago creado correctamente"});
                   } catch (err) {
                     return err;
                   }
@@ -94,6 +107,7 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
 
                   try {
                     await fetchApi(user.token, "payment", "PUT", body);
+                    toast({title: "Pago editado correctamente"});
                   } catch (err) {
                     return err;
                   }
@@ -156,6 +170,7 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
                       setDeleteSumbitting(true);
                       try {
                         await fetchApi(user.token, "payment", "DELETE", {_id: payment?._id});
+                        toast({title: "Pago eliminado correctamente"});
                       } catch (err) {
                         return err;
                       }

@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import {Formik, Field, Form} from "formik";
 import {FC, useContext, useState} from "react";
+import {useToast} from "@chakra-ui/react";
 
 import fetchApi from "../../../helper functions/fetchApi";
 import {category} from "../../../helper functions/interfaces";
@@ -31,6 +32,17 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const dispatch = useContext(UserDispatchContext);
   const user = useContext(UserContext);
+  const toast = useToast({
+    position: "bottom-left",
+    status: "success",
+    duration: 3500,
+    isClosable: true,
+    containerStyle: {
+      marginLeft: "2em",
+      marginBottom: "2em",
+    },
+  });
+
   let initialValues;
 
   if (category) {
@@ -50,7 +62,6 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
       <Button onClick={onOpen}>
         {isEdit ? <EditIcon color="green" /> : <SmallAddIcon boxSize={10} color="green" />}
       </Button>
-
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -83,6 +94,7 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
 
                   try {
                     await fetchApi(user.token, "category", "POST", body);
+                    toast({title: "Categoria creada correctamente"});
                   } catch (err) {
                     return err;
                   }
@@ -91,6 +103,7 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
 
                   try {
                     await fetchApi(user.token, "category", "PUT", body);
+                    toast({title: "Categoria editada correctamente"});
                   } catch (err) {
                     return err;
                   }
@@ -142,6 +155,7 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
                       setDeleteSumbitting(true);
                       try {
                         await fetchApi(user.token, "category", "DELETE", {_id: category?._id});
+                        toast({title: "Categoria eliminada correctamente"});
                       } catch (err) {
                         return err;
                       }
