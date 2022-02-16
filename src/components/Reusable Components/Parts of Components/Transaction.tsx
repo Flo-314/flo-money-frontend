@@ -2,6 +2,8 @@ import {Box, Flex, Text} from "@chakra-ui/react";
 import {FC} from "react";
 import {AiFillCaretDown, AiFillCaretUp} from "react-icons/ai";
 
+import {category, payment} from "../../../helper functions/interfaces";
+
 import CategoryModal from "./CategoryModal";
 import PaymentModal from "./PaymentModal";
 
@@ -10,19 +12,10 @@ interface Props {
   ammount: number;
   isIncome?: boolean;
   color: string;
-  isEditable?: boolean;
-  isCategory?: boolean;
-  isPayment?: boolean;
+  payment?: payment;
+  category?: category;
 }
-const Transaction: FC<Props> = ({
-  name,
-  ammount,
-  isIncome,
-  color,
-  isEditable,
-  isPayment,
-  isCategory,
-}) => {
+const Transaction: FC<Props> = ({name, ammount, isIncome, color, payment, category}) => {
   return (
     <Flex borderBottom={"1px"} borderColor="gray" justify={"space-between"} paddingBottom="5">
       <Flex align={"center"} gap="5">
@@ -40,8 +33,12 @@ const Transaction: FC<Props> = ({
         <Text fontSize={30} fontWeight={600}>
           ${ammount}
         </Text>
-        {isEditable && isPayment && <PaymentModal isEdit={true} />}
-        {isEditable && isCategory && <CategoryModal isEdit={true} />}
+        {payment && category && (
+          <PaymentModal category={category} isEdit={true} payment={payment} />
+        )}
+        {category && !payment && (
+          <CategoryModal category={category} isEdit={true} isIncome={isIncome} />
+        )}
       </Flex>
     </Flex>
   );

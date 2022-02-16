@@ -5,26 +5,42 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import {Formik, Field, Form, FormikHelpers} from "formik";
-import {FC, useContext} from "react";
+import {Formik, Field, Form} from "formik";
+import {FC, useContext, useState} from "react";
 
 import fetchApi from "../../../helper functions/fetchApi";
+import {category} from "../../../helper functions/interfaces";
 import {UserContext, UserDispatchContext} from "../../../helper functions/UserContext";
 interface Props {
-  isEdit: boolean;
+  isEdit?: boolean;
+  isIncome?: boolean;
+  category?: category;
 }
 interface Values {
-  name: string;
-  color: string;
+  name?: string;
+  color?: string;
 }
-const CategoryModal: FC<Props> = ({isEdit}) => {
+const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
+  const [isSumbitting, setIsSumbitting] = useState(false);
   const {isOpen, onOpen, onClose} = useDisclosure();
   const dispatch = useContext(UserDispatchContext);
   const user = useContext(UserContext);
+  let initialValues;
+
+  if (category) {
+    initialValues = {
+      name: category.name,
+      color: category.color,
+    };
+  } else {
+    initialValues = {
+      name: "",
+      color: "#ffffff",
+    };
+  }
 
   return (
     <Box>
@@ -41,40 +57,72 @@ const CategoryModal: FC<Props> = ({isEdit}) => {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Formik
-              initialValues={{
-                name: "",
-                color: "",
+              initialValues={initialValues}
+              onSubmit={async (values: Values) => {
+                setIsSumbitting(true);
+
+                let target;
+
+                if (isIncome) {
+                  target = "income";
+                } else {
+                  target = "outcome";
+                }
+
+                if (!isEdit && user.token) {
+                  let body = {
+                    name: values.name,
+                    color: values.color,
+                    _id: user.userId,
+                    target,
+                    isIncome,
+                  };
+
+                  try {
+                    await fetchApi(user.token, "category", "POST", body);
+                  } catch (err) {
+                    return err;
+                  }
+                } else if (isEdit && user.token && category) {
+                  let body = {name: values.name, color: values.color, _id: category._id, target};
+
+                  try {
+                    await fetchApi(user.token, "category", "PUT", body);
+                  } catch (err) {
+                    return err;
+                  }
+                }
+                setIsSumbitting(false);
+                onClose();
               }}
-              onSubmit={async (values: Values) => {}}
             >
               <Form>
                 <FormControl>
                   <FormLabel>Nombre de la Categoria</FormLabel>
-                  <Input placeholder="Nombre de la Categoria" />
+                  <Input as={Field} name="name" placeholder="Nombre de la Categoria" />
                 </FormControl>
-
                 <FormControl mt={4}>
                   <FormLabel>Color de la categoria</FormLabel>
-                  <Input type="color" />
+                  <Input as={Field} name="color" type="color" />
                 </FormControl>
-
-                <FormControl mt={4}>
-                  <FormLabel>Es Mensual?</FormLabel>
-                  <input
-                    style={{paddingLeft: "1em", minWidth: "32px", minHeight: "32px"}}
-                    type="checkbox"
-                  />
-                </FormControl>
+                <Button
+                  bg="primary"
+                  color="white"
+                  colorScheme="blue"
+                  fontSize="20"
+                  fontWeight={700}
+                  isLoading={isSumbitting === true ? true : false}
+                  mr={3}
+                  type="submit"
+                >
+                  {isEdit ? "Guardar" : "Crear"}
+                </Button>
+                <Button disabled={isSumbitting === true ? true : false} onClick={onClose}>
+                  Cancelar
+                </Button>
               </Form>
             </Formik>
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              {isEdit ? "Guardar" : "Crear"}
-            </Button>
-            <Button onClick={onClose}>Cancelar</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </Box>

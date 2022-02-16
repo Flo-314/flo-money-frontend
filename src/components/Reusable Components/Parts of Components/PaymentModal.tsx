@@ -5,17 +5,47 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import {FC} from "react";
+import {Formik, Field, Form} from "formik";
+import {FC, useContext, useState} from "react";
+
+import fetchApi from "../../../helper functions/fetchApi";
+import {category, payment} from "../../../helper functions/interfaces";
+import {UserContext, UserDispatchContext} from "../../../helper functions/UserContext";
 
 interface Props {
-  isEdit: boolean;
+  isEdit?: boolean;
+  isIncome?: boolean;
+  payment?: payment;
+  category?: category;
 }
-const PaymentModal: FC<Props> = ({isEdit}) => {
+interface Values {
+  name?: string;
+  ammount?: number;
+  isMonthly?: boolean;
+}
+const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
+  const [isSumbitting, setIsSumbitting] = useState(false);
   const {isOpen, onOpen, onClose} = useDisclosure();
+  const dispatch = useContext(UserDispatchContext);
+  const user = useContext(UserContext);
+  let initialValues;
+
+  if (payment) {
+    initialValues = {
+      name: payment.name,
+      ammount: payment.ammount,
+      isMonthly: payment.isMonthly,
+    };
+  } else {
+    initialValues = {
+      name: "",
+      ammount: 0,
+      isMonthly: false,
+    };
+  }
 
   return (
     <Box>
@@ -31,31 +61,82 @@ const PaymentModal: FC<Props> = ({isEdit}) => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Nombre de la transacción</FormLabel>
-              <Input placeholder="Nombre de la transacción" />
-            </FormControl>
+            <Formik
+              initialValues={initialValues}
+              onSubmit={async (values: Values) => {
+                setIsSumbitting(true);
 
-            <FormControl mt={4}>
-              <FormLabel>Monto de la Transacción</FormLabel>
-              <Input placeholder="1230" type="number" />
-            </FormControl>
+                if (!isEdit && user.token && category) {
+                  let body = {
+                    name: values.name,
+                    ammount: values.ammount,
+                    _id: category._id,
+                    isMonthly: values.isMonthly,
+                    isIncome,
+                  };
 
-            <FormControl mt={4}>
-              <FormLabel>Es Mensual?</FormLabel>
-              <input
-                style={{paddingLeft: "1em", minWidth: "32px", minHeight: "32px"}}
-                type="checkbox"
-              />
-            </FormControl>
+                  try {
+                    await fetchApi(user.token, "payment", "POST", body);
+                  } catch (err) {
+                    return err;
+                  }
+                } else if (isEdit && user.token && payment) {
+                  let body = {
+                    name: values.name,
+                    ammount: values.ammount,
+                    _id: payment._id,
+                    isMonthly: values.isMonthly,
+                    isIncome,
+                  };
+
+                  try {
+                    await fetchApi(user.token, "payment", "PUT", body);
+                  } catch (err) {
+                    return err;
+                  }
+                }
+                setIsSumbitting(false);
+                onClose();
+              }}
+            >
+              <Form>
+                <FormControl>
+                  <FormLabel>Nombre de la transacción</FormLabel>
+                  <Input as={Field} name="name" placeholder="Nombre de la transacción" />
+                </FormControl>
+
+                <FormControl mt={4}>
+                  <FormLabel>Monto de la Transacción</FormLabel>
+                  <Input as={Field} name="ammount" placeholder="1230" type="number" />
+                </FormControl>
+
+                <FormControl mt={4}>
+                  <FormLabel>Es Mensual?</FormLabel>
+                  <Field
+                    name="isMonthly"
+                    style={{paddingLeft: "1em", minWidth: "32px", minHeight: "32px"}}
+                    type="checkbox"
+                  />
+                </FormControl>
+
+                <Button
+                  bg="primary"
+                  color="white"
+                  colorScheme="blue"
+                  fontSize="20"
+                  fontWeight={700}
+                  isLoading={isSumbitting === true ? true : false}
+                  mr={3}
+                  type="submit"
+                >
+                  {isEdit ? "Guardar" : "Crear"}
+                </Button>
+                <Button disabled={isSumbitting === true ? true : false} onClick={onClose}>
+                  Cancelar
+                </Button>
+              </Form>
+            </Formik>
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              {isEdit ? "Guardar" : "Crear"}
-            </Button>
-            <Button onClick={onClose}>Cancelar</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </Box>

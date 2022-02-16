@@ -1,6 +1,5 @@
-import {Flex, Text, Select, Button} from "@chakra-ui/react";
+import {Flex, Text, Select} from "@chakra-ui/react";
 import {FC, useState} from "react";
-import {SmallAddIcon} from "@chakra-ui/icons";
 
 import sumOfPayments from "../../../helper functions/sumOfPayments";
 import {category, payment} from "../../../helper functions/interfaces";
@@ -13,16 +12,16 @@ interface Props {
   category?: category;
   arrayOfCategories?: category[];
   isSelected?: boolean;
-  isEditable?: boolean;
   isAddible?: boolean;
+  isIncome?: boolean;
 }
 const ListOfTransactions: FC<Props> = ({
   title,
   category,
   arrayOfCategories,
   isSelected,
-  isEditable,
   isAddible,
+  isIncome,
 }) => {
   const [selectedCategory, SetSelectedCategory] = useState<number>(0);
 
@@ -73,8 +72,12 @@ const ListOfTransactions: FC<Props> = ({
               })}
           </Select>
         )}
-        {isAddible && arrayOfCategories && !isSelected ? <CategoryModal isEdit={false} /> : null}
-        {isAddible && arrayOfCategories && isSelected ? <PaymentModal isEdit={false} /> : null}
+        {isAddible && arrayOfCategories && !isSelected ? (
+          <CategoryModal isEdit={false} isIncome={isIncome} />
+        ) : null}
+        {isAddible && arrayOfCategories && isSelected ? (
+          <PaymentModal category={arrayOfCategories[selectedCategory]} isEdit={false} />
+        ) : null}
       </Flex>
 
       {/*  CUANDO ES POR CATEGORIA. */}
@@ -86,11 +89,11 @@ const ListOfTransactions: FC<Props> = ({
               <Transaction
                 key={index}
                 ammount={payment.ammount}
+                category={category}
                 color={payment.color}
-                isEditable={isEditable}
                 isIncome={category.isIncome}
-                isPayment={true}
                 name={payment.name}
+                payment={payment}
               />
             );
           })}
@@ -104,9 +107,8 @@ const ListOfTransactions: FC<Props> = ({
               <Transaction
                 key={index}
                 ammount={sumOfPayments(category)}
+                category={category}
                 color={category.color}
-                isCategory={true}
-                isEditable={isEditable}
                 isIncome={category.isIncome}
                 name={category.name}
               />
@@ -122,11 +124,11 @@ const ListOfTransactions: FC<Props> = ({
               <Transaction
                 key={index}
                 ammount={payments.ammount}
+                category={arrayOfCategories[selectedCategory]}
                 color={arrayOfCategories[selectedCategory].color}
-                isEditable={isEditable}
                 isIncome={arrayOfCategories[selectedCategory].isIncome}
-                isPayment={true}
                 name={payments.name}
+                payment={payments}
               />
             );
           })}

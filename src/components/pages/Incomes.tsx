@@ -47,7 +47,7 @@ function Incomes() {
                   <ListOfTransactions
                     arrayOfCategories={incomes}
                     isAddible={true}
-                    isEditable={true}
+                    isIncome={true}
                     title="Categorías"
                   />
                 </GridItem>
@@ -56,7 +56,7 @@ function Incomes() {
                   <ListOfTransactions
                     arrayOfCategories={incomes}
                     isAddible={true}
-                    isEditable={true}
+                    isIncome={true}
                     isSelected={true}
                   />
                 </GridItem>
