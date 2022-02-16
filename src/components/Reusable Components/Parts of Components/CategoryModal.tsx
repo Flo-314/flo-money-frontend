@@ -9,12 +9,22 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import {FC} from "react";
+import {Formik, Field, Form, FormikHelpers} from "formik";
+import {FC, useContext} from "react";
+
+import fetchApi from "../../../helper functions/fetchApi";
+import {UserContext, UserDispatchContext} from "../../../helper functions/UserContext";
 interface Props {
   isEdit: boolean;
 }
+interface Values {
+  name: string;
+  color: string;
+}
 const CategoryModal: FC<Props> = ({isEdit}) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
+  const dispatch = useContext(UserDispatchContext);
+  const user = useContext(UserContext);
 
   return (
     <Box>
@@ -30,28 +40,38 @@ const CategoryModal: FC<Props> = ({isEdit}) => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Nombre de la Categoria</FormLabel>
-              <Input placeholder="Nombre de la Categoria" />
-            </FormControl>
+            <Formik
+              initialValues={{
+                name: "",
+                color: "",
+              }}
+              onSubmit={async (values: Values) => {}}
+            >
+              <Form>
+                <FormControl>
+                  <FormLabel>Nombre de la Categoria</FormLabel>
+                  <Input placeholder="Nombre de la Categoria" />
+                </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Monto de la Categoria</FormLabel>
-              <Input placeholder="1230" type="number" />
-            </FormControl>
+                <FormControl mt={4}>
+                  <FormLabel>Color de la categoria</FormLabel>
+                  <Input type="color" />
+                </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Es Mensual?</FormLabel>
-              <input
-                style={{paddingLeft: "1em", minWidth: "32px", minHeight: "32px"}}
-                type="checkbox"
-              />
-            </FormControl>
+                <FormControl mt={4}>
+                  <FormLabel>Es Mensual?</FormLabel>
+                  <input
+                    style={{paddingLeft: "1em", minWidth: "32px", minHeight: "32px"}}
+                    type="checkbox"
+                  />
+                </FormControl>
+              </Form>
+            </Formik>
           </ModalBody>
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3}>
-              Guardar
+              {isEdit ? "Guardar" : "Crear"}
             </Button>
             <Button onClick={onClose}>Cancelar</Button>
           </ModalFooter>

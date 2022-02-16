@@ -24,7 +24,7 @@ function Header() {
           bg="bgSecondary"
           direction={"column"}
           minH="100vh"
-          paddingTop="7rem"
+          paddingTop="3.4rem"
           width="300px"
         >
           <Box>

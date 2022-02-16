@@ -16,7 +16,7 @@ function Home() {
   return (
     <main>
       {user.data && (
-        <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
+        <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="3rem" width="100%">
           <Box marginLeft={"10%"} maxWidth="1100px" width="80%">
             <section id="overview">
               <HeaderPage title="Vista General " />
@@ -102,14 +102,15 @@ function Home() {
           </Box>
         </Box>
       )}
-      {!user.data && user.token ? (
+      {!user.data && user.token && (
         <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
           <Text fontSize="50" fontWeight={700}>
             Loading...
           </Text>
           <Spinner boxSize={200} color="green" thickness={30} />
         </Flex>
-      ) : (
+      )}
+      {!user.data && !user.token && (
         <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
           <Text fontSize="50" fontWeight={700}>
             Please Log-In or Sign Up

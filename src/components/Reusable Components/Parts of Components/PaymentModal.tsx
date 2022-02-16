@@ -52,7 +52,7 @@ const PaymentModal: FC<Props> = ({isEdit}) => {
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3}>
-              Guardar
+              {isEdit ? "Guardar" : "Crear"}
             </Button>
             <Button onClick={onClose}>Cancelar</Button>
           </ModalFooter>
