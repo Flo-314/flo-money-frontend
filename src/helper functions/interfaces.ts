@@ -16,7 +16,7 @@ export interface category {
 export interface data {
   incomes: category[];
   outcomes: category[];
-  projections: category;
+  projections: category[];
 }
 export interface user {
   userId?: string;

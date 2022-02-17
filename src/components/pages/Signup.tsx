@@ -62,13 +62,13 @@ function Singup() {
             validationSchema={SignupSchema}
             onSubmit={async (values: Values, {setSubmitting}: FormikHelpers<Values>) => {
               setIsSumbitting(true);
-              let body = JSON.stringify({
+              let body = {
                 fullname: values.fullname,
                 username: values.username,
                 email: values.email,
                 password: values.password,
                 confpassword: values.confpassword,
-              });
+              };
               let user = await fetchApi("a", "signup", "POST", body);
 
               if (user.errors) {

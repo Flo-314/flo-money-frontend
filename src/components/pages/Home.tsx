@@ -8,6 +8,7 @@ import ListOfTransactions from "../Reusable Components/Parts of Components/ListO
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
 import {UserContext} from "../../helper functions/UserContext";
 import {user} from "../../helper functions/interfaces";
+import sumOfCategory from "../../helper functions/sumOfCategory";
 function Home() {
   const user: user = useContext(UserContext);
 
@@ -23,6 +24,7 @@ function Home() {
 
               <Grid
                 gap="20"
+                paddingBottom={10}
                 templateColumns={{"2xl": "1fr 1fr", sm: "1fr"}}
                 templateRows={"minmax(1px, 350px) minmax(1px, 350px)"}
               >
@@ -43,36 +45,11 @@ function Home() {
                         </Text>
                       </Flex>
                       <Text color="white" fontSize={40} fontWeight="700">
-                        $134.000
+                        ${sumOfCategory(user.data.incomes) - sumOfCategory(user.data.outcomes)}
                       </Text>
-                    </Flex>
-                    <Flex
-                      bg="bgSecondary"
-                      borderRadius={20}
-                      direction="column"
-                      gap="5"
-                      paddingTop="5"
-                      paddingX="5"
-                    >
-                      <Text borderBottom={"1px"} borderColor="gray" fontSize="30" fontWeight={600}>
-                        Ultimas transacciones:
-                      </Text>
-                      <Transaction
-                        ammount={user.data.outcomes[0]?.payments[1]?.ammount}
-                        color={user.data.outcomes[0]?.color}
-                        isIncome={false}
-                        name={user.data.outcomes[0]?.payments[1]?.name}
-                      />
-                      <Transaction
-                        ammount={user.data.incomes[0]?.payments[1]?.ammount}
-                        color={user.data.incomes[0]?.color}
-                        isIncome={true}
-                        name={user.data.incomes[0]?.payments[1]?.name}
-                      />
                     </Flex>
                   </Flex>
                 </GridItem>
-                {/*  incomes   */}
 
                 <GridItem>
                   <ListOfTransactions

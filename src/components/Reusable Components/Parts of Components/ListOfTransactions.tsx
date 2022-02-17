@@ -31,9 +31,11 @@ const ListOfTransactions: FC<Props> = ({
       borderRadius={10}
       css={{
         "&::-webkit-scrollbar": {
+          marginBottom: "1.2rem",
           width: "4px",
         },
         "&::-webkit-scrollbar-track": {
+          marginBottom: "1.2rem",
           width: "6px",
         },
         "&::-webkit-scrollbar-thumb": {
@@ -77,6 +79,10 @@ const ListOfTransactions: FC<Props> = ({
         ) : null}
         {isAddible && arrayOfCategories && arrayOfCategories.length > 0 && isSelected ? (
           <PaymentModal category={arrayOfCategories[selectedCategory]} isEdit={false} />
+        ) : null}
+
+        {isAddible && !arrayOfCategories && category && !isSelected ? (
+          <PaymentModal category={category} isEdit={false} />
         ) : null}
       </Flex>
 
