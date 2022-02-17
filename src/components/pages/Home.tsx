@@ -3,7 +3,6 @@ import {useContext} from "react";
 import {AiOutlineDollarCircle} from "react-icons/ai";
 
 import Graph from "../Reusable Components/Parts of Components/Graph";
-import Transaction from "../Reusable Components/Parts of Components/Transaction";
 import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
 import {UserContext} from "../../helper functions/UserContext";
@@ -11,8 +10,6 @@ import {user} from "../../helper functions/interfaces";
 import sumOfCategory from "../../helper functions/sumOfCategory";
 function Home() {
   const user: user = useContext(UserContext);
-
-  console.log(user);
 
   return (
     <main>
@@ -84,7 +81,7 @@ function Home() {
           <Text fontSize="50" fontWeight={700}>
             Loading...
           </Text>
-          <Spinner boxSize={200} color="green" thickness={30} />
+          <Spinner boxSize={200} color="green" thickness={"3em"} />
         </Flex>
       )}
       {!user.data && !user.token && (

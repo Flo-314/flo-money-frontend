@@ -47,7 +47,6 @@ function Incomes() {
                   <ListOfTransactions
                     arrayOfCategories={outcomes}
                     isAddible={true}
-                    isEditable={true}
                     title="Categorías"
                   />
                 </GridItem>
@@ -56,7 +55,6 @@ function Incomes() {
                   <ListOfTransactions
                     arrayOfCategories={outcomes}
                     isAddible={true}
-                    isEditable={true}
                     isSelected={true}
                   />
                 </GridItem>
@@ -76,7 +74,7 @@ function Incomes() {
           <Text fontSize="50" fontWeight={700}>
             Loading...
           </Text>
-          <Spinner boxSize={200} color="green" thickness={30} />
+          <Spinner boxSize={200} color="green" thickness={"3em"} />
         </Flex>
       )}
       {!user.data && !user.token && (

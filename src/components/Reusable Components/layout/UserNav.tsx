@@ -2,16 +2,7 @@ import {MoonIcon, SunIcon} from "@chakra-ui/icons";
 import {Button, Center, Flex, Text, useColorMode, Link} from "@chakra-ui/react";
 import {AiOutlineUser} from "react-icons/ai";
 import {Link as RouteLink} from "react-router-dom";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-} from "@chakra-ui/react";
+import {Menu, MenuButton, MenuList, MenuItem} from "@chakra-ui/react";
 import {useContext} from "react";
 
 import {UserDispatchContext} from "../../../helper functions/UserContext";

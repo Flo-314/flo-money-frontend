@@ -1,4 +1,4 @@
-const fetchApi = async (token: string, route: string, action: string, body: any) => {
+const fetchApi = async (token: string | any, route: string, action: string, body: any) => {
   try {
     const Authorization = "Bearer " + token;
     let link = "https://flo-money.herokuapp.com/api/" + route;
@@ -16,10 +16,7 @@ const fetchApi = async (token: string, route: string, action: string, body: any)
       },
     });
 
-    console.log(ping);
     const response = await ping.json();
-
-    console.log(response);
 
     return response;
   } catch (err) {

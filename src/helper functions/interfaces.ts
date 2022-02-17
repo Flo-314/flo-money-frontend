@@ -4,6 +4,7 @@ export interface payment {
   name: string;
   date?: Date;
   _id?: string;
+  color?: any;
 }
 export interface category {
   name: string;

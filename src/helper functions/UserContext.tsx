@@ -7,4 +7,6 @@ export const UserContext = createContext<user>({
   userId: undefined,
   data: undefined,
 });
-export const UserDispatchContext = createContext({});
+export const UserDispatchContext = createContext({
+  dispatch: () => {},
+});

@@ -4,7 +4,7 @@ import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import fetchApi from "../../helper functions/fetchApi";
-import {UserContext, UserDispatchContext} from "../../helper functions/UserContext";
+import {UserDispatchContext} from "../../helper functions/UserContext";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
 
 interface Values {
@@ -16,7 +16,6 @@ function Login() {
   const [isSumbitting, setIsSumbitting] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useContext(UserDispatchContext);
-  const user = useContext(UserContext);
   const navigate = useNavigate();
 
   return (

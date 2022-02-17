@@ -76,7 +76,7 @@ function Incomes() {
           <Text fontSize="50" fontWeight={700}>
             Loading...
           </Text>
-          <Spinner boxSize={200} color="green" thickness={30} />
+          <Spinner boxSize={200} color="green" thickness={"3em"} />
         </Flex>
       )}
       {!user.data && !user.token && (
