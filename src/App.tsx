@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     //si hay usuario en local storage pero no en state
-    if (localStorage.loggedUser && !user.token) {
+    if (localStorage.loggedUser && localStorage.loggedUser.length > 2 && !user.token) {
       dispatch({type: "loadUser"});
     }
     // si hay usuario en state pero no fetcheo la data

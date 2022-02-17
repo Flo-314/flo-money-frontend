@@ -14,6 +14,7 @@ interface Props {
   isSelected?: boolean;
   isAddible?: boolean;
   isIncome?: boolean;
+  noColor?: boolean;
 }
 const ListOfTransactions: FC<Props> = ({
   title,
@@ -22,6 +23,7 @@ const ListOfTransactions: FC<Props> = ({
   isSelected,
   isAddible,
   isIncome,
+  noColor,
 }) => {
   const [selectedCategory, SetSelectedCategory] = useState<number>(0);
 
@@ -100,6 +102,7 @@ const ListOfTransactions: FC<Props> = ({
                 isEditable={isAddible}
                 isIncome={category.isIncome}
                 name={payment.name}
+                noColor={noColor}
                 payment={payment}
               />
             );

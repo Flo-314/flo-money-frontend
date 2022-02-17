@@ -15,6 +15,7 @@ interface Props {
   payment?: payment;
   category?: category;
   isEditable?: boolean;
+  noColor?: boolean;
 }
 const Transaction: FC<Props> = ({
   name,
@@ -24,11 +25,12 @@ const Transaction: FC<Props> = ({
   payment,
   category,
   isEditable,
+  noColor,
 }) => {
   return (
     <Flex borderBottom={"1px"} borderColor="gray" justify={"space-between"} paddingBottom="5">
       <Flex align={"center"} gap="5">
-        <Box bg={color} borderRadius={"full"} height="38px" width="38px" />
+        {noColor ? null : <Box bg={color} borderRadius={"full"} height="38px" width="38px" />}
         <Text fontSize="25" fontWeight={500}>
           {name}
         </Text>

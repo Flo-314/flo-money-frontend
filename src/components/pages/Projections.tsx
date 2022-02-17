@@ -48,17 +48,19 @@ function Projections() {
                   </Flex>
                 </GridItem>
                 <GridItem borderRadius={20}>
-                  <Flex gap="5" height={"100%"} justifyContent="space-evenly">
+                  <Flex gap="5" height={"100%"} justifyContent="space-evenly" width="100%">
                     <ListOfTransactions
                       category={user.data.projections[0]}
                       isAddible={true}
                       isIncome={true}
+                      noColor={true}
                       title="Ingresos estimados"
                     />
                     <ListOfTransactions
                       category={user.data.projections[1]}
                       isAddible={true}
                       isIncome={false}
+                      noColor={true}
                       title="Egresos estimados"
                     />
                   </Flex>
