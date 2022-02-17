@@ -1,4 +1,4 @@
-import {background, Box, Flex, Text} from "@chakra-ui/react";
+import {Box, Flex, Text} from "@chakra-ui/react";
 import {FC, useEffect, useState} from "react";
 import {Pie} from "react-chartjs-2";
 
@@ -30,8 +30,6 @@ const Graph: FC<Props> = ({arrayOfCategories1, arrayOfCategories2, isOverview}) 
             },
           ],
         };
-
-        console.log(data);
 
         setData(data);
       } else if (arrayOfCategories1 && !isOverview) {

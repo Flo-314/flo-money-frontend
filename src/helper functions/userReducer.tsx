@@ -1,6 +1,5 @@
-import localStoreUser from "./LocalStoreUser";
 import {user} from "./interfaces";
-
+import localStoreUser from "./LocalStoreUser";
 interface action {
   type: "pushUser" | "loadUser" | "login" | "logout";
   user?: user;
@@ -28,7 +27,7 @@ export default function userReducer(user: user, action: action) {
     }
     case "login": {
       if (action.user) {
-        const User = action.user;
+        const User: any = action.user;
 
         localStoreUser(User);
 

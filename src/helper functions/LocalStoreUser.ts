@@ -1,9 +1,4 @@
-interface user {
-  token: string;
-  id: string;
-}
-
-const localStoreUser = (user: user) => {
+const localStoreUser = (user: any) => {
   let User = JSON.stringify(user);
 
   localStorage.setItem("loggedUser", User);
