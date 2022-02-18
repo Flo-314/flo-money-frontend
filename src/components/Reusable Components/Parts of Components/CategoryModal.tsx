@@ -66,7 +66,7 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
 
   return (
     <Box>
-      <Button onClick={onOpen}>
+      <Button position={{base: "initial", lg: "relative"}} onClick={onOpen}>
         {isEdit ? (
           <EditIcon color={isIncome ? "green" : "red"} />
         ) : (
@@ -161,6 +161,7 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
                     fontWeight={700}
                     isLoading={isSumbitting === true ? true : false}
                     mr={3}
+                    position={{base: "initial", lg: "relative"}}
                     type="submit"
                   >
                     {isEdit ? "Guardar" : "Crear"}
@@ -174,6 +175,7 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
                       fontWeight={700}
                       isLoading={deleteSumbitting === true ? true : false}
                       mr={3}
+                      position={{base: "initial", lg: "relative"}}
                       onClick={async () => {
                         setDeleteSumbitting(true);
                         try {
@@ -201,6 +203,7 @@ const CategoryModal: FC<Props> = ({isEdit, isIncome, category}) => {
                   ) : null}
                   <Button
                     disabled={isSumbitting || deleteSumbitting === true ? true : false}
+                    position={{base: "initial", lg: "relative"}}
                     onClick={onClose}
                   >
                     Cancelar

@@ -130,6 +130,7 @@ function Login() {
                       fontSize="20"
                       fontWeight={700}
                       isLoading={isSumbitting === true ? true : false}
+                      position={{base: "initial", lg: "relative"}}
                       type="submit"
                     >
                       Ingresar

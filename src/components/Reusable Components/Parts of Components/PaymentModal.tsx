@@ -70,7 +70,7 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
 
   return (
     <Box>
-      <Button onClick={onOpen}>
+      <Button position={{base: "initial", lg: "relative"}} onClick={onOpen}>
         {isEdit ? (
           <EditIcon color={isIncome ? "green" : "red"} />
         ) : (
@@ -175,6 +175,7 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
                     fontWeight={700}
                     isLoading={isSumbitting === true ? true : false}
                     mr={3}
+                    position={{base: "initial", lg: "relative"}}
                     type="submit"
                   >
                     {isEdit ? "Guardar" : "Crear"}
@@ -188,6 +189,7 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
                       fontWeight={700}
                       isLoading={deleteSumbitting === true ? true : false}
                       mr={3}
+                      position={{base: "initial", lg: "relative"}}
                       onClick={async () => {
                         setDeleteSumbitting(true);
                         try {
@@ -217,6 +219,7 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
 
                   <Button
                     disabled={isSumbitting || deleteSumbitting === true ? true : false}
+                    position={{base: "initial", lg: "relative"}}
                     onClick={onClose}
                   >
                     Cancelar

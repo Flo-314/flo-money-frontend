@@ -34,7 +34,7 @@ function Incomes() {
   return (
     <main>
       {user.data && (
-        <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="3rem" width="100%">
+        <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingY="3rem" width="100%">
           <Box marginLeft={"10%"} maxWidth="1000px" width="80%">
             <section id="overview">
               <HeaderPage title="Egresos" />
@@ -80,18 +80,16 @@ function Incomes() {
       )}
       {!user.data && !user.token && (
         <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
-          <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
-            <Text fontSize="50" fontWeight={700}>
-              Please{" "}
-              <Link as={RouteLink} color="green.500" to={"/login"}>
-                Log-In
-              </Link>{" "}
-              or{" "}
-              <Link as={RouteLink} color="green.500" to={"/singup"}>
-                Sign Up
-              </Link>
-            </Text>
-          </Flex>
+          <Text fontSize="50" fontWeight={700}>
+            Por favor{" "}
+            <Link as={RouteLink} color="green.500" to={"/login"}>
+              inicia sesion
+            </Link>{" "}
+            o{" "}
+            <Link as={RouteLink} color="green.500" to={"/singup"}>
+              crea tu cuenta
+            </Link>
+          </Text>
         </Flex>
       )}
     </main>

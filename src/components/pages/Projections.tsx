@@ -1,6 +1,7 @@
-import {Box, Flex, Grid, GridItem, Text} from "@chakra-ui/react";
+import {Box, Flex, Grid, GridItem, Link, Spinner, Text} from "@chakra-ui/react";
 import {useContext} from "react";
 import {AiOutlineDollarCircle} from "react-icons/ai";
+import {Link as RouteLink} from "react-router-dom";
 
 import sumOfCategory from "../../helper functions/sumOfCategory";
 import {UserContext} from "../../helper functions/UserContext";
@@ -112,6 +113,28 @@ function Projections() {
                   </Flex>
                 </GridItem>
               </Grid>
+            )}
+            {!user.data && user.token && (
+              <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
+                <Text fontSize="50" fontWeight={700}>
+                  Loading...
+                </Text>
+                <Spinner boxSize={200} color="green" thickness={"3em"} />
+              </Flex>
+            )}
+            {!user.data && !user.token && (
+              <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
+                <Text fontSize="50" fontWeight={700}>
+                  Por favor{" "}
+                  <Link as={RouteLink} color="green.500" to={"/login"}>
+                    inicia sesion
+                  </Link>{" "}
+                  o{" "}
+                  <Link as={RouteLink} color="green.500" to={"/singup"}>
+                    crea tu cuenta
+                  </Link>
+                </Text>
+              </Flex>
             )}
           </section>
         </Box>

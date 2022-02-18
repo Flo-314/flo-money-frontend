@@ -15,7 +15,7 @@ function Home() {
   return (
     <main>
       {user.data && (
-        <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="3rem" width="100%">
+        <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingY="3rem" width="100%">
           <Box marginLeft={"10%"} maxWidth="1100px" width="80%">
             <section id="overview">
               <HeaderPage title="Vista General " />
@@ -92,13 +92,13 @@ function Home() {
       {!user.data && !user.token && (
         <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
           <Text fontSize="50" fontWeight={700}>
-            Please{" "}
+            Por favor{" "}
             <Link as={RouteLink} color="green.500" to={"/login"}>
-              Log-In
+              inicia sesion
             </Link>{" "}
-            or{" "}
+            o{" "}
             <Link as={RouteLink} color="green.500" to={"/singup"}>
-              Sign Up
+              crea tu cuenta
             </Link>
           </Text>
         </Flex>

@@ -13,7 +13,13 @@ function MobileHeader() {
   return (
     <Center display={{lg: "none", base: "inherit"}}>
       <Menu>
-        <MenuButton as={Button} bg={"bgPrimary"} fontSize={23} fontWeight={"bold"}>
+        <MenuButton
+          as={Button}
+          bg={"bgPrimary"}
+          fontSize={23}
+          fontWeight={"bold"}
+          position={{base: "initial", lg: "relative"}}
+        >
           Menu
         </MenuButton>
 

@@ -13,7 +13,7 @@ function UserNav() {
 
   return (
     <nav>
-      <Flex align={"center"} gap="5" justify="center">
+      <Flex align={"center"} direction={{base: "column", lg: "row"}} gap="5" justify="center">
         <Flex align={"center"} gap="1" justify={"center"}>
           <Menu>
             <MenuButton
@@ -22,6 +22,7 @@ function UserNav() {
               fontSize="25"
               fontWeight={600}
               paddingY="7"
+              position={{base: "initial", lg: "relative"}}
               rightIcon={<AiOutlineUser color="green" size="25" />}
             >
               Mi cuenta
@@ -30,7 +31,7 @@ function UserNav() {
               <MenuItem>
                 <Link as={RouteLink} to="/account">
                   <Text fontSize={20} fontWeight={600}>
-                    My Account
+                    Mi cuenta
                   </Text>
                 </Link>
               </MenuItem>
@@ -40,13 +41,13 @@ function UserNav() {
                 }}
               >
                 <Text fontSize={20} fontWeight={600}>
-                  Logout
+                  Cerrar Sesion
                 </Text>
               </MenuItem>
             </MenuList>
           </Menu>
         </Flex>
-        <Button bg="inherit" onClick={toggleColorMode}>
+        <Button bg="inherit" position={{base: "initial", lg: "relative"}} onClick={toggleColorMode}>
           <Center>
             {colorMode === "light" && <MoonIcon boxSize={25} color="green" />}
             {colorMode === "dark" && <SunIcon boxSize={25} color="green" />}
