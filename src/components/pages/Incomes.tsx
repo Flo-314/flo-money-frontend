@@ -64,7 +64,11 @@ function Incomes() {
                   <Graph arrayOfCategories1={incomes} />
                 </GridItem>
                 <GridItem borderRadius={20}>
-                  <ListOfTransactions category={payments} title={"Todas las entradas"} />
+                  <ListOfTransactions
+                    category={payments}
+                    isIncome={true}
+                    title={"Todas las entradas"}
+                  />
                 </GridItem>
               </Grid>
             </section>

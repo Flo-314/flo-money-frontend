@@ -41,7 +41,7 @@ const ListOfTransactions: FC<Props> = ({
           width: "6px",
         },
         "&::-webkit-scrollbar-thumb": {
-          background: "green",
+          background: isIncome ? "green" : "red",
           borderRadius: "24px",
         },
       }}
@@ -59,7 +59,7 @@ const ListOfTransactions: FC<Props> = ({
 
         {isSelected && (
           <Select
-            borderColor="green"
+            borderColor={isIncome ? "green" : "red"}
             fontSize={20}
             fontWeight={600}
             onChange={(e) => {
