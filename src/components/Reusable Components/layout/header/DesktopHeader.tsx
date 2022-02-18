@@ -33,7 +33,6 @@ function DesktopHeader() {
               paddingY="2"
               width={"100%"}
             >
-              {}
               <Center alignSelf={"center"}>
                 <AiOutlineBank
                   color={selectedPage === "vista general" ? "white" : "green"}

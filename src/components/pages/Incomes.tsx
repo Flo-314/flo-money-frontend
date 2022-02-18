@@ -1,5 +1,6 @@
-import {Box, Flex, Grid, GridItem, Text, Spinner} from "@chakra-ui/react";
+import {Box, Flex, Grid, GridItem, Text, Spinner, Link} from "@chakra-ui/react";
 import {useContext, useEffect, useState} from "react";
+import {Link as RouteLink} from "react-router-dom";
 
 import {category, user} from "../../helper functions/interfaces";
 import {UserContext} from "../../helper functions/UserContext";
@@ -85,9 +86,18 @@ function Incomes() {
       )}
       {!user.data && !user.token && (
         <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
-          <Text fontSize="50" fontWeight={700}>
-            Please Log-In or Sign Up
-          </Text>
+          <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
+            <Text fontSize="50" fontWeight={700}>
+              Please{" "}
+              <Link as={RouteLink} color="green.500" to={"/login"}>
+                Log-In
+              </Link>{" "}
+              or{" "}
+              <Link as={RouteLink} color="green.500" to={"/singup"}>
+                Sign Up
+              </Link>
+            </Text>
+          </Flex>
         </Flex>
       )}
     </main>

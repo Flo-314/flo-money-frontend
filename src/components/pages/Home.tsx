@@ -1,6 +1,7 @@
-import {Box, Flex, Grid, GridItem, Spinner, Text} from "@chakra-ui/react";
+import {Box, Flex, Grid, GridItem, Link, Spinner, Text} from "@chakra-ui/react";
 import {useContext} from "react";
 import {AiOutlineDollarCircle} from "react-icons/ai";
+import {Link as RouteLink} from "react-router-dom";
 
 import Graph from "../Reusable Components/Parts of Components/Graph";
 import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";
@@ -91,7 +92,14 @@ function Home() {
       {!user.data && !user.token && (
         <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
           <Text fontSize="50" fontWeight={700}>
-            Please Log-In or Sign Up
+            Please{" "}
+            <Link as={RouteLink} color="green.500" to={"/login"}>
+              Log-In
+            </Link>{" "}
+            or{" "}
+            <Link as={RouteLink} color="green.500" to={"/singup"}>
+              Sign Up
+            </Link>
           </Text>
         </Flex>
       )}
