@@ -23,7 +23,10 @@ function Projections() {
               <Grid
                 gap="10"
                 gridTemplateColumns="1fr"
-                gridTemplateRows={"1fr minmax(1px, 350px) 1fr"}
+                gridTemplateRows={{
+                  lg: "1fr minmax(1px, 350px) 1fr",
+                  base: "minmax(1px, 100px) minmax(1px, 350px) 1fr minmax(1px, 350px)",
+                }}
               >
                 <GridItem>
                   <Flex borderRadius={20} direction="column" gap="5" height="100%">
@@ -48,7 +51,13 @@ function Projections() {
                   </Flex>
                 </GridItem>
                 <GridItem borderRadius={20}>
-                  <Flex gap="5" height={"100%"} justifyContent="space-evenly" width="100%">
+                  <Box
+                    display={{lg: "flex", base: "block"}}
+                    gap="5"
+                    height={"100%"}
+                    justifyContent="space-evenly"
+                    width="100%"
+                  >
                     <ListOfTransactions
                       category={user.data.projections[0]}
                       isAddible={true}
@@ -56,14 +65,25 @@ function Projections() {
                       noColor={true}
                       title="Ingresos estimados"
                     />
-                    <ListOfTransactions
-                      category={user.data.projections[1]}
-                      isAddible={true}
-                      isIncome={false}
-                      noColor={true}
-                      title="Egresos estimados"
-                    />
-                  </Flex>
+                    <Box display={{lg: "inherit", base: "none"}}>
+                      <ListOfTransactions
+                        category={user.data.projections[1]}
+                        isAddible={true}
+                        isIncome={false}
+                        noColor={true}
+                        title="Egresos estimados"
+                      />
+                    </Box>
+                  </Box>
+                </GridItem>
+                <GridItem display={{lg: "none", base: "inherit"}}>
+                  <ListOfTransactions
+                    category={user.data.projections[1]}
+                    isAddible={true}
+                    isIncome={false}
+                    noColor={true}
+                    title="Egresos estimados"
+                  />
                 </GridItem>
                 <GridItem borderRadius={20}>
                   <Flex borderRadius={20} direction="column" gap="5" height="100%">
