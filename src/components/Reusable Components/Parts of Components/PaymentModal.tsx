@@ -30,7 +30,7 @@ interface Values {
   isMonthly?: boolean;
 }
 const SignupSchema = Yup.object().shape({
-  name: Yup.string().min(1, "Mas texto").max(18, "Mucho texto!").required("Required"),
+  name: Yup.string().min(1, "Mas texto").max(25, "Mucho texto!").required("Required"),
   ammount: Yup.number().min(0).max(1000000000, "Monto muy grande").required(),
 });
 

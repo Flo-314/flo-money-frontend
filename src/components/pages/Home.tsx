@@ -23,7 +23,10 @@ function Home() {
                 gap="20"
                 paddingBottom={10}
                 templateColumns={{"2xl": "1fr 1fr", sm: "1fr"}}
-                templateRows={"minmax(1px, 350px) minmax(1px, 350px)"}
+                templateRows={{
+                  lg: "minmax(1px, 350px) minmax(1px, 350px)",
+                  base: "minmax(1px, 150px) minmax(1px, 350px) 1fr minmax(1px, 350px)",
+                }}
               >
                 <GridItem>
                   <Flex borderRadius={20} direction="column" gap="5" height="100%">

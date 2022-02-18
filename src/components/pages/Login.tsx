@@ -33,7 +33,7 @@ function Login() {
     <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="7rem" width="100%">
       <Flex direction={"column"} justify="center" marginLeft={"10%"} maxWidth="1100px" width="80%">
         <Box>
-          <HeaderPage title="Iniciar Sesion" />
+          <HeaderPage noUserNav={true} title="Iniciar Sesion" />
         </Box>
         <Box
           bg="bgSecondary"

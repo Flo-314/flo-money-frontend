@@ -29,7 +29,7 @@ interface Values {
 }
 
 const SignupSchema = Yup.object().shape({
-  name: Yup.string().min(1, "Mas texto").max(18, "Mucho texto!").required("Required"),
+  name: Yup.string().min(1, "Mas texto").max(25, "Mucho texto!").required("Required"),
   color: Yup.string().min(1, "Mas texto").max(16, "Mucho texto!").required("Required"),
 });
 

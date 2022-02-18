@@ -1,10 +1,10 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import {Flex} from "@chakra-ui/react";
+import {Grid, GridItem} from "@chakra-ui/react";
 import "./styling/app.css";
 import {useEffect, useReducer} from "react";
 
 import Home from "./components/pages/Home";
-import Header from "./components/Reusable Components/layout/Header";
+import Header from "./components/Reusable Components/layout/header/Header";
 import Footer from "./components/Reusable Components/layout/Footer";
 import Outcomes from "./components/pages/Outcomes";
 import Incomes from "./components/pages/Incomes";
@@ -43,9 +43,14 @@ function App() {
     <BrowserRouter>
       <UserContext.Provider value={user}>
         <UserDispatchContext.Provider value={dispatch}>
-          <Flex paddingTop={""} width="100vw">
-            <Header />
-            <Flex direction={"column"} width="100%">
+          <Grid
+            gridTemplateColumns={{lg: "300px 1fr", base: "1fr"}}
+            gridTemplateRows={{lg: "1fr", base: "120px 1fr"}}
+          >
+            <GridItem bg="bgSecondary" height="100%" minH={"100vh"}>
+              <Header />
+            </GridItem>
+            <GridItem>
               <Routes>
                 <Route element={<Home />} path="/" />
                 <Route element={<Outcomes />} path="/egresos" />
@@ -57,8 +62,8 @@ function App() {
               </Routes>
 
               <Footer />
-            </Flex>
-          </Flex>
+            </GridItem>
+          </Grid>
         </UserDispatchContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>

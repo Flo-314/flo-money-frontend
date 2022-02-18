@@ -27,8 +27,6 @@ const Transaction: FC<Props> = ({
   isEditable,
   noColor,
 }) => {
-  console.log(isIncome);
-
   return (
     <Flex borderBottom={"1px"} borderColor="gray" justify={"space-between"} paddingBottom="5">
       <Flex align={"center"} gap="5">
