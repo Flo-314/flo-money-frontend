@@ -60,10 +60,9 @@ function App() {
                 <Route element={<Login />} path="/login" />
                 <Route element={<Signup />} path="/singup" />
               </Routes>
-
-              <Footer />
             </GridItem>
           </Grid>
+          <Footer />
         </UserDispatchContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>
