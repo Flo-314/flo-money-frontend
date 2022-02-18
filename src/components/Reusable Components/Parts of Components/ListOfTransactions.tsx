@@ -49,7 +49,7 @@ const ListOfTransactions: FC<Props> = ({
       height="100%"
       maxH="100%"
       overflow={"scroll"}
-      overflowX="hidden"
+      overflowX="scroll"
       padding="6"
     >
       <Flex

@@ -15,7 +15,7 @@ function Home() {
   return (
     <main>
       {user.data && (
-        <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingY="3rem" width="100%">
+        <Box bg="bgPrimary" height="100%" minHeight={"100vh"} paddingTop="3rem" width="100%">
           <Box marginLeft={"10%"} maxWidth="1100px" width="80%">
             <section id="overview">
               <HeaderPage title="Vista General " />
@@ -23,7 +23,7 @@ function Home() {
               <Grid
                 gap="20"
                 paddingBottom={10}
-                templateColumns={{"2xl": "1fr 1fr", sm: "1fr"}}
+                templateColumns={{lg: "1fr 1fr", sm: "1fr", base: "minmax(1px, 300px)"}}
                 templateRows={{
                   lg: "minmax(1px, 350px) minmax(1px, 350px)",
                   base: "minmax(1px, 150px) minmax(1px, 350px) 1fr minmax(1px, 350px)",
@@ -92,13 +92,13 @@ function Home() {
       {!user.data && !user.token && (
         <Flex align="center" direction={"column"} justify={"center"} marginTop={"15%"}>
           <Text fontSize="50" fontWeight={700}>
-            Por favor{" "}
+            Please{" "}
             <Link as={RouteLink} color="green.500" to={"/login"}>
-              inicia sesion
+              Log-In
             </Link>{" "}
-            o{" "}
+            or{" "}
             <Link as={RouteLink} color="green.500" to={"/singup"}>
-              crea tu cuenta
+              Sign Up
             </Link>
           </Text>
         </Flex>

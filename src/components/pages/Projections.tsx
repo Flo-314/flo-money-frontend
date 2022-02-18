@@ -23,11 +23,11 @@ function Projections() {
             {user.data && (
               <Grid
                 gap="10"
-                gridTemplateColumns="1fr"
                 gridTemplateRows={{
                   lg: "1fr minmax(1px, 350px) 1fr",
                   base: "minmax(1px, 100px) minmax(1px, 350px) 1fr minmax(1px, 350px)",
                 }}
+                templateColumns={{sm: "1fr", base: "minmax(1px, 345px)"}}
               >
                 <GridItem>
                   <Flex borderRadius={20} direction="column" gap="5" height="100%">

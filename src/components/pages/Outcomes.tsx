@@ -41,7 +41,7 @@ function Incomes() {
 
               <Grid
                 gap="20"
-                templateColumns={{"2xl": "1fr 1fr", sm: "1fr"}}
+                templateColumns={{lg: "1fr 1fr", sm: "1fr", base: "minmax(1px, 300px)"}}
                 templateRows={"minmax(1px, 350px) minmax(1px, 350px)"}
               >
                 <GridItem borderRadius={20} height="100%">
