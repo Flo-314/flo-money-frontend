@@ -44,6 +44,9 @@ const ListOfTransactions: FC<Props> = ({
           background: isIncome ? "green" : "red",
           borderRadius: "24px",
         },
+        "::-webkit-scrollbar-corner": {
+          background: "rgba(0,0,0,0)",
+        },
       }}
       direction={"column"}
       height="100%"
