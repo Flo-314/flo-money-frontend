@@ -25,8 +25,11 @@ const SignupSchema = Yup.object().shape({
     .min(2, "Introduce un username valido!")
     .max(18, "Mucho texto!")
     .required("Required"),
-  email: Yup.string().email("Email invalido").max(50, "Mucho texto").required("Required"),
-  password: Yup.string().min(8, "8 caracteres requeridos.").required("Contraseña Requerida"),
+  email: Yup.string().email("Email invalido").max(500, "Mucho texto").required("Required"),
+  password: Yup.string()
+    .min(8, "8 caracteres requeridos.")
+    .required("Contraseña Requerida")
+    .max(50),
   confpassword: Yup.string().oneOf(
     [Yup.ref("password"), null],
     "Las contraseñas tienen que coincidir",
@@ -35,6 +38,7 @@ const SignupSchema = Yup.object().shape({
 
 function Singup() {
   const [isSumbitting, setIsSumbitting] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   return (
@@ -60,6 +64,7 @@ function Singup() {
             }}
             validationSchema={SignupSchema}
             onSubmit={async (values: Values, {setSubmitting}: FormikHelpers<Values>) => {
+              setError("");
               setIsSumbitting(true);
               let body = {
                 fullname: values.fullname,
@@ -71,9 +76,7 @@ function Singup() {
               let user = await fetchApi("a", "signup", "POST", body);
 
               if (user.errors) {
-                prompt(
-                  "Si te pasa este error, disculpa, proba otras combinaciones esta en proceso todavía la pagina.",
-                );
+                setError(user.errors.msg);
                 setIsSumbitting(false);
               } else {
                 navigate("/login");
@@ -182,6 +185,11 @@ function Singup() {
                     {errors.confpassword && touched.confpassword ? (
                       <Text color="red" fontSize={20} fontWeight={600}>
                         {errors.confpassword}
+                      </Text>
+                    ) : null}
+                    {error ? (
+                      <Text color="red" fontSize={20}>
+                        {error}
                       </Text>
                     ) : null}
                     <Button
