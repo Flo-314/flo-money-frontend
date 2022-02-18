@@ -52,8 +52,15 @@ const ListOfTransactions: FC<Props> = ({
       overflowX="hidden"
       padding="6"
     >
-      <Flex borderBottom={"1px"} borderColor="gray" gap="2" marginBottom={5} paddingBottom="2">
-        <Text fontSize="30" fontWeight={600}>
+      <Flex
+        borderBottom={"1px"}
+        borderColor="gray"
+        gap="2"
+        justifyContent={"space-between"}
+        marginBottom={5}
+        paddingBottom="2"
+      >
+        <Text fontSize="25" fontWeight={600}>
           {title}
         </Text>
 

@@ -31,7 +31,7 @@ const Transaction: FC<Props> = ({
     <Flex borderBottom={"1px"} borderColor="gray" justify={"space-between"} paddingBottom="5">
       <Flex align={"center"} gap="5">
         {noColor ? null : <Box bg={color} borderRadius={"full"} height="38px" width="38px" />}
-        <Text fontSize="25" fontWeight={500}>
+        <Text fontSize="20" fontWeight={500}>
           {name}
         </Text>
       </Flex>
@@ -41,7 +41,7 @@ const Transaction: FC<Props> = ({
         ) : (
           <AiFillCaretUp color="green" size={20} />
         )}
-        <Text fontSize={30} fontWeight={600}>
+        <Text fontSize={25} fontWeight={600}>
           ${ammount}
         </Text>
         {payment && category && isEditable && (
