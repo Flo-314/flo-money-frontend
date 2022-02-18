@@ -51,6 +51,7 @@ function Home() {
                 <GridItem>
                   <ListOfTransactions
                     arrayOfCategories={user.data?.incomes}
+                    isIncome={true}
                     title="Ingresos mensuales"
                   />
                 </GridItem>
