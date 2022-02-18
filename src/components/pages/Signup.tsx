@@ -71,7 +71,9 @@ function Singup() {
               let user = await fetchApi("a", "signup", "POST", body);
 
               if (user.errors) {
-                prompt("?este error no debería existir nunca? ? ?? ??");
+                prompt(
+                  "Si te pasa este error, disculpa, proba otras combinaciones esta en proceso todavía la pagina.",
+                );
                 setIsSumbitting(false);
               } else {
                 navigate("/login");

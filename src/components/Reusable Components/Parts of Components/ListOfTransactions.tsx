@@ -80,11 +80,15 @@ const ListOfTransactions: FC<Props> = ({
           <CategoryModal isEdit={false} isIncome={isIncome} />
         ) : null}
         {isAddible && arrayOfCategories && arrayOfCategories.length > 0 && isSelected ? (
-          <PaymentModal category={arrayOfCategories[selectedCategory]} isEdit={false} />
+          <PaymentModal
+            category={arrayOfCategories[selectedCategory]}
+            isEdit={false}
+            isIncome={isIncome}
+          />
         ) : null}
 
         {isAddible && !arrayOfCategories && category && !isSelected ? (
-          <PaymentModal category={category} isEdit={false} />
+          <PaymentModal category={category} isEdit={false} isIncome={isIncome} />
         ) : null}
       </Flex>
 

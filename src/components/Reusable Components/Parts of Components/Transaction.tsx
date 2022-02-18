@@ -27,6 +27,8 @@ const Transaction: FC<Props> = ({
   isEditable,
   noColor,
 }) => {
+  console.log(isIncome);
+
   return (
     <Flex borderBottom={"1px"} borderColor="gray" justify={"space-between"} paddingBottom="5">
       <Flex align={"center"} gap="5">
@@ -45,7 +47,7 @@ const Transaction: FC<Props> = ({
           ${ammount}
         </Text>
         {payment && category && isEditable && (
-          <PaymentModal category={category} isEdit={true} payment={payment} />
+          <PaymentModal category={category} isEdit={true} isIncome={isIncome} payment={payment} />
         )}
         {category && !payment && isEditable && (
           <CategoryModal category={category} isEdit={true} isIncome={isIncome} />
@@ -56,42 +58,3 @@ const Transaction: FC<Props> = ({
 };
 
 export default Transaction;
-
-/*
-edit payment
-  -api(id, ammount,name,ismonthly)
-    agarras la id, fetcheas un PUT con el nuevo payment.
-  -state(isIncome, id)
-    -is income?
-      -if true
-        -buscar en incomes
-          -buscar en cada categoria
-            -remplazar por nuevo state
-
-      -if false
-        -buscar en outcomes
-          -buscar en cada categoria
-            -remplazar por nuevo state
-
-
-
-edit category
-  -api(id, name,color)
-    agarras la id, fetcheas un PUT con el nuevo payment.
-  -state(isIncome, id)
-    -is income?
-      -if true
-        -buscar en incomes
-          -buscar en cada categoria
-            -remplazar por nuevo state
-
-      -if false
-        -buscar en outcomes
-          -buscar en cada categoria
-            -remplazar por nuevo state
-
-
-
-
-
-*/

@@ -2,6 +2,7 @@ import {FormControl, FormLabel, Button, Input, Flex, Box, Text} from "@chakra-ui
 import {Formik, Field, Form, FormikHelpers} from "formik";
 import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import * as Yup from "yup";
 
 import fetchApi from "../../helper functions/fetchApi";
 import {UserDispatchContext} from "../../helper functions/UserContext";
@@ -11,6 +12,16 @@ interface Values {
   username: string;
   password: string;
 }
+const SignupSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(2, "Introduce un username valido!")
+    .max(18, "Mucho texto!")
+    .required("Required"),
+  password: Yup.string()
+    .min(8, "8 caracteres requeridos.")
+    .max(18, "mucho texto")
+    .required("Contraseña Requerida"),
+});
 
 function Login() {
   const [isSumbitting, setIsSumbitting] = useState(false);
@@ -36,6 +47,7 @@ function Login() {
               username: "",
               password: "",
             }}
+            validationSchema={SignupSchema}
             onSubmit={async (values: Values, {setSubmitting}: FormikHelpers<Values>) => {
               setIsSumbitting(true);
               setError("");
@@ -52,56 +64,80 @@ function Login() {
               }
             }}
           >
-            <Form>
-              <FormControl>
-                <Flex direction="column" gap="5">
-                  <Flex borderBottom={"2px"} borderColor="gray" paddingBottom="5">
-                    <FormLabel fontSize={20} htmlFor="username" minW={"30%"}>
-                      Username:
-                    </FormLabel>
-                    <Input
-                      as={Field}
-                      bg="gray"
+            {({errors, touched}) => (
+              <Form>
+                <FormControl>
+                  <Flex direction="column" gap="5">
+                    <Flex
+                      borderBottom={"2px"}
+                      borderColor="gray"
+                      direction={"column"}
+                      paddingBottom="5"
+                    >
+                      <Flex>
+                        <FormLabel fontSize={20} htmlFor="username" minW={"30%"}>
+                          Username:
+                        </FormLabel>
+                        <Input
+                          as={Field}
+                          bg="gray"
+                          fontWeight={700}
+                          id="username"
+                          isRequired={true}
+                          name="username"
+                          placeholder="username"
+                        />
+                      </Flex>
+                      {errors.username && touched.username ? (
+                        <Text color="red" fontSize={20} fontWeight={600} marginY="5">
+                          {errors.username}
+                        </Text>
+                      ) : null}
+                    </Flex>
+
+                    <Flex direction={"column"} paddingBottom="5">
+                      <Flex align="center">
+                        <FormLabel fontSize={20} htmlFor="password" minW={"30%"}>
+                          Password:
+                        </FormLabel>
+                        <Input
+                          as={Field}
+                          bg="gray"
+                          fontWeight={700}
+                          id="password"
+                          isRequired={true}
+                          name="password"
+                          placeholder="Password"
+                          type="password"
+                        />
+                      </Flex>
+                      {errors.password && touched.password ? (
+                        <Text color="red" fontSize={20} fontWeight={600} marginY="5">
+                          {errors.password}
+                        </Text>
+                      ) : null}
+
+                      {error && (
+                        <Text color="red" fontSize={20} fontWeight={600}>
+                          {error}
+                        </Text>
+                      )}
+                    </Flex>
+
+                    <Button
+                      bg="primary"
+                      color="white"
+                      fontSize="20"
                       fontWeight={700}
-                      id="username"
-                      isRequired={true}
-                      name="username"
-                      placeholder="username"
-                    />
+                      isLoading={isSumbitting === true ? true : false}
+                      type="submit"
+                    >
+                      Ingresar
+                    </Button>
                   </Flex>
-                  <Flex align="center">
-                    <FormLabel fontSize={20} htmlFor="password" minW={"30%"}>
-                      Password:
-                    </FormLabel>
-                    <Input
-                      as={Field}
-                      bg="gray"
-                      fontWeight={700}
-                      id="password"
-                      isRequired={true}
-                      name="password"
-                      placeholder="Password"
-                      type="password"
-                    />
-                  </Flex>
-                  {error && (
-                    <Text color="red" fontSize={20} fontWeight={600}>
-                      {error}
-                    </Text>
-                  )}
-                  <Button
-                    bg="primary"
-                    color="white"
-                    fontSize="20"
-                    fontWeight={700}
-                    isLoading={isSumbitting === true ? true : false}
-                    type="submit"
-                  >
-                    Ingresar
-                  </Button>
-                </Flex>
-              </FormControl>
-            </Form>
+                </FormControl>
+              </Form>
+            )}
           </Formik>
         </Box>
       </Flex>

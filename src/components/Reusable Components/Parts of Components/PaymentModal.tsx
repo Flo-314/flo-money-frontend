@@ -11,6 +11,7 @@ import {
 import {Formik, Field, Form} from "formik";
 import {FC, useContext, useState} from "react";
 import {useToast} from "@chakra-ui/react";
+import * as Yup from "yup";
 
 import fetchApi from "../../../helper functions/fetchApi";
 import {category, payment} from "../../../helper functions/interfaces";
@@ -28,6 +29,11 @@ interface Values {
   ammount?: number;
   isMonthly?: boolean;
 }
+const SignupSchema = Yup.object().shape({
+  name: Yup.string().min(1, "Mas texto").max(18, "Mucho texto!").required("Required"),
+  ammount: Yup.number().min(0).max(1000000000, "Monto muy grande").required(),
+});
+
 const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
   const [isSumbitting, setIsSumbitting] = useState(false);
   const [deleteSumbitting, setDeleteSumbitting] = useState(false);
@@ -65,7 +71,11 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
   return (
     <Box>
       <Button onClick={onOpen}>
-        {isEdit ? <EditIcon color="green" /> : <SmallAddIcon boxSize={10} color="green" />}
+        {isEdit ? (
+          <EditIcon color={isIncome ? "green" : "red"} />
+        ) : (
+          <SmallAddIcon boxSize={10} color={isIncome ? "green" : "red"} />
+        )}
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -78,6 +88,7 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
           <ModalBody pb={6}>
             <Formik
               initialValues={initialValues}
+              validationSchema={SignupSchema}
               onSubmit={async (values: Values) => {
                 setIsSumbitting(true);
 
@@ -125,80 +136,93 @@ const PaymentModal: FC<Props> = ({isEdit, isIncome, category, payment}) => {
                 onClose();
               }}
             >
-              <Form>
-                <FormControl>
-                  <FormLabel>Nombre de la transacción</FormLabel>
-                  <Input as={Field} name="name" placeholder="Nombre de la transacción" />
-                </FormControl>
+              {({errors, touched}) => (
+                <Form>
+                  <FormControl>
+                    <FormLabel>Nombre de la transacción</FormLabel>
+                    <Input as={Field} name="name" placeholder="Nombre de la transacción" />
+                    {errors.name && touched.name ? (
+                      <Text color="red" fontSize={20} fontWeight={600} marginY="5">
+                        {errors.name}
+                      </Text>
+                    ) : null}
+                  </FormControl>
 
-                <FormControl mt={4}>
-                  <FormLabel>Monto de la Transacción</FormLabel>
-                  <Input as={Field} name="ammount" placeholder="1230" type="number" />
-                </FormControl>
+                  <FormControl mt={4}>
+                    <FormLabel>Monto de la Transacción</FormLabel>
+                    <Input as={Field} name="ammount" placeholder="1230" type="number" />
+                    {errors.ammount && touched.ammount ? (
+                      <Text color="red" fontSize={20} fontWeight={600} marginY="5">
+                        {errors.ammount}
+                      </Text>
+                    ) : null}
+                  </FormControl>
 
-                <FormControl mt={4}>
-                  <FormLabel>Es Mensual?</FormLabel>
-                  <Field
-                    name="isMonthly"
-                    style={{paddingLeft: "1em", minWidth: "32px", minHeight: "32px"}}
-                    type="checkbox"
-                  />
-                </FormControl>
+                  <FormControl mt={4}>
+                    <FormLabel>Es Mensual?</FormLabel>
+                    <Field
+                      name="isMonthly"
+                      style={{paddingLeft: "1em", minWidth: "32px", minHeight: "32px"}}
+                      type="checkbox"
+                    />
+                  </FormControl>
 
-                <Button
-                  bg="primary"
-                  color="white"
-                  disabled={deleteSumbitting === true ? true : false}
-                  fontSize="20"
-                  fontWeight={700}
-                  isLoading={isSumbitting === true ? true : false}
-                  mr={3}
-                  type="submit"
-                >
-                  {isEdit ? "Guardar" : "Crear"}
-                </Button>
-                {isEdit && user.token ? (
                   <Button
-                    bg="red"
+                    bg="primary"
                     color="white"
-                    disabled={isSumbitting === true ? true : false}
+                    disabled={deleteSumbitting === true ? true : false}
                     fontSize="20"
                     fontWeight={700}
-                    isLoading={deleteSumbitting === true ? true : false}
+                    isLoading={isSumbitting === true ? true : false}
                     mr={3}
-                    onClick={async () => {
-                      setDeleteSumbitting(true);
-                      try {
-                        await fetchApi(user.token, "payment", "DELETE", {_id: payment?._id});
-                        toast({title: "Pago eliminado correctamente"});
-                      } catch (err) {
-                        return err;
-                      }
-
-                      if (user.token) {
-                        const body = {_id: user.userId};
-                        let data = await fetchApi(user.token, "user", "POST", body);
-
-                        data = data.data;
-                        const User: user = {...user, data};
-
-                        dispatch({type: "pushUser", user: User});
-                      }
-                      setDeleteSumbitting(false);
-                      onClose();
-                    }}
+                    type="submit"
                   >
-                    Delete
+                    {isEdit ? "Guardar" : "Crear"}
                   </Button>
-                ) : null}
+                  {isEdit && user.token ? (
+                    <Button
+                      bg="red"
+                      color="white"
+                      disabled={isSumbitting === true ? true : false}
+                      fontSize="20"
+                      fontWeight={700}
+                      isLoading={deleteSumbitting === true ? true : false}
+                      mr={3}
+                      onClick={async () => {
+                        setDeleteSumbitting(true);
+                        try {
+                          await fetchApi(user.token, "payment", "DELETE", {_id: payment?._id});
+                          toast({title: "Pago eliminado correctamente"});
+                        } catch (err) {
+                          return err;
+                        }
 
-                <Button
-                  disabled={isSumbitting || deleteSumbitting === true ? true : false}
-                  onClick={onClose}
-                >
-                  Cancelar
-                </Button>
-              </Form>
+                        if (user.token) {
+                          const body = {_id: user.userId};
+
+                          let data = await fetchApi(user.token, "user", "POST", body);
+
+                          data = data.data;
+                          const User: user = {...user, data};
+
+                          dispatch({type: "pushUser", user: User});
+                        }
+                        setDeleteSumbitting(false);
+                        onClose();
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  ) : null}
+
+                  <Button
+                    disabled={isSumbitting || deleteSumbitting === true ? true : false}
+                    onClick={onClose}
+                  >
+                    Cancelar
+                  </Button>
+                </Form>
+              )}
             </Formik>
           </ModalBody>
         </ModalContent>
