@@ -35,6 +35,7 @@ function Projections() {
                       align={"center"}
                       bg="primary"
                       borderRadius={20}
+                      direction={{sm: "row", base: "column"}}
                       justify="space-around"
                       maxHeight="100%"
                       paddingY={5}
@@ -92,6 +93,7 @@ function Projections() {
                       align={"center"}
                       bg="red"
                       borderRadius={20}
+                      direction={{sm: "row", base: "column"}}
                       justify="space-around"
                       paddingX=""
                       paddingY={5}

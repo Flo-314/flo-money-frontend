@@ -35,6 +35,7 @@ function Home() {
                       align={"center"}
                       bg="primary"
                       borderRadius={20}
+                      direction={{sm: "row", base: "column"}}
                       justify="space-around"
                       paddingX=""
                       paddingY={5}
