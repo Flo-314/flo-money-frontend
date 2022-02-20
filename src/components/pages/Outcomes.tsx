@@ -2,8 +2,8 @@ import {Box, Flex, Grid, GridItem, Text, Spinner, Link} from "@chakra-ui/react";
 import {useContext, useEffect, useState} from "react";
 import {Link as RouteLink} from "react-router-dom";
 
-import {category, user} from "../../helper functions/interfaces";
-import {UserContext} from "../../helper functions/UserContext";
+import {category, user} from "../../helper functions/types/interfaces";
+import {UserContext} from "../../helper functions/React Logic/UserContext";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
 import Graph from "../Reusable Components/Parts of Components/Graph";
 import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";

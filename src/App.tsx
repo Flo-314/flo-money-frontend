@@ -12,10 +12,10 @@ import Projections from "./components/pages/Projections";
 import Account from "./components/pages/Account";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
-import {UserContext, UserDispatchContext} from "./helper functions/UserContext";
-import userReducer from "./helper functions/userReducer";
-import fetchApi from "./helper functions/fetchApi";
-import {user} from "./helper functions/interfaces";
+import {UserContext, UserDispatchContext} from "./helper functions/React Logic/UserContext";
+import userReducer from "./helper functions/React Logic/userReducer";
+import fetchApi from "./helper functions/Logic/fetchApi";
+import {user} from "./helper functions/types/interfaces";
 function App() {
   const initialUser: user = {token: undefined, userId: undefined, data: undefined};
   const [user, dispatch] = useReducer(userReducer, initialUser);

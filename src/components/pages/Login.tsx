@@ -4,8 +4,8 @@ import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 
-import fetchApi from "../../helper functions/fetchApi";
-import {UserDispatchContext} from "../../helper functions/UserContext";
+import fetchApi from "../../helper functions/Logic/fetchApi";
+import {UserDispatchContext} from "../../helper functions/React Logic/UserContext";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
 
 interface Values {

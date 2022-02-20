@@ -1,6 +1,6 @@
 import {createContext} from "react";
 
-import {user} from "./interfaces";
+import {user} from "../types/interfaces";
 
 export const UserContext = createContext<user>({
   token: undefined,

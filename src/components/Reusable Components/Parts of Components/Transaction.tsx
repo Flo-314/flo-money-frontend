@@ -2,7 +2,7 @@ import {Box, Flex, Text} from "@chakra-ui/react";
 import {FC} from "react";
 import {AiFillCaretDown, AiFillCaretUp} from "react-icons/ai";
 
-import {category, payment} from "../../../helper functions/interfaces";
+import {category, payment} from "../../../helper functions/types/interfaces";
 
 import CategoryModal from "./CategoryModal";
 import PaymentModal from "./PaymentModal";

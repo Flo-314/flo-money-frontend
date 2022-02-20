@@ -1,8 +1,8 @@
 import {Flex, Text, Select} from "@chakra-ui/react";
 import {FC, useState} from "react";
 
-import sumOfPayments from "../../../helper functions/sumOfPayments";
-import {category, payment} from "../../../helper functions/interfaces";
+import sumOfPayments from "../../../helper functions/Logic/sumOfPayments";
+import {category, payment} from "../../../helper functions/types/interfaces";
 
 import Transaction from "./Transaction";
 import PaymentModal from "./PaymentModal";
@@ -51,8 +51,7 @@ const ListOfTransactions: FC<Props> = ({
       direction={"column"}
       height="100%"
       maxH="100%"
-      overflow={"scroll"}
-      overflowX="scroll"
+      overflowY={"scroll"}
       padding="6"
     >
       <Flex

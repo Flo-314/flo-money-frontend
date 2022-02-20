@@ -1,5 +1,5 @@
-import {user} from "./interfaces";
-import localStoreUser from "./LocalStoreUser";
+import {user} from "../types/interfaces";
+import localStoreUser from "../Logic/LocalStoreUser";
 interface action {
   type: "pushUser" | "loadUser" | "login" | "logout";
   user?: user;

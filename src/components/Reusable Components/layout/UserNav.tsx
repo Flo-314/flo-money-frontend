@@ -5,7 +5,7 @@ import {Link as RouteLink} from "react-router-dom";
 import {Menu, MenuButton, MenuList, MenuItem} from "@chakra-ui/react";
 import {useContext} from "react";
 
-import {UserDispatchContext} from "../../../helper functions/UserContext";
+import {UserDispatchContext} from "../../../helper functions/React Logic/UserContext";
 
 function UserNav() {
   const {colorMode, toggleColorMode} = useColorMode();

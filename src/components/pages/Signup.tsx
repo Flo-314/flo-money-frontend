@@ -6,7 +6,7 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
-import fetchApi from "../../helper functions/fetchApi";
+import fetchApi from "../../helper functions/Logic/fetchApi";
 
 interface Values {
   fullname: string;

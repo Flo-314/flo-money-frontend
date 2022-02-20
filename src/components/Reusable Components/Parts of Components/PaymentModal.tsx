@@ -13,10 +13,10 @@ import {FC, useContext, useState} from "react";
 import {useToast} from "@chakra-ui/react";
 import * as Yup from "yup";
 
-import fetchApi from "../../../helper functions/fetchApi";
-import {category, payment} from "../../../helper functions/interfaces";
-import {UserContext, UserDispatchContext} from "../../../helper functions/UserContext";
-import {user} from "../../../helper functions/interfaces";
+import fetchApi from "../../../helper functions/Logic/fetchApi";
+import {category, payment} from "../../../helper functions/types/interfaces";
+import {UserContext, UserDispatchContext} from "../../../helper functions/React Logic/UserContext";
+import {user} from "../../../helper functions/types/interfaces";
 
 interface Props {
   isEdit?: boolean;

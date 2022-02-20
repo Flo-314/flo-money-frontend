@@ -6,9 +6,9 @@ import {Link as RouteLink} from "react-router-dom";
 import Graph from "../Reusable Components/Parts of Components/Graph";
 import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
-import {UserContext} from "../../helper functions/UserContext";
-import {user} from "../../helper functions/interfaces";
-import sumOfCategory from "../../helper functions/sumOfCategory";
+import {UserContext} from "../../helper functions/React Logic/UserContext";
+import {user} from "../../helper functions/types/interfaces";
+import sumOfCategory from "../../helper functions/Logic/sumOfCategory";
 function Home() {
   const user: user = useContext(UserContext);
 

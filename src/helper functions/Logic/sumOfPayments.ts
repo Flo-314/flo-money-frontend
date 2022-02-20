@@ -1,4 +1,4 @@
-import {category, payment} from "./interfaces";
+import {category, payment} from "../types/interfaces";
 
 const sumOfPayments = (category: category) => {
   let sum = 0;

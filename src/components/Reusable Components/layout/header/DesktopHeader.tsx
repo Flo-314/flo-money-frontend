@@ -11,8 +11,8 @@ import {FiLogIn, FiLogOut} from "react-icons/fi";
 import {useState} from "react";
 import {useContext} from "react";
 
-import {user} from "../../../../helper functions/interfaces";
-import {UserContext} from "../../../../helper functions/UserContext";
+import {user} from "../../../../helper functions/types/interfaces";
+import {UserContext} from "../../../../helper functions/React Logic/UserContext";
 
 function DesktopHeader() {
   const [selectedPage, setSelectedPage] = useState("vista general");

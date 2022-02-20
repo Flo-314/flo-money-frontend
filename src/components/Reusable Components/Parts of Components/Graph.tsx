@@ -2,9 +2,9 @@ import {Box, Flex, Text} from "@chakra-ui/react";
 import {FC, useEffect, useState} from "react";
 import {Pie} from "react-chartjs-2";
 
-import {category} from "../../../helper functions/interfaces";
-import sumOfCategory from "../../../helper functions/sumOfCategory";
-import sumOfPayments from "../../../helper functions/sumOfPayments";
+import {category} from "../../../helper functions/types/interfaces";
+import sumOfCategory from "../../../helper functions/Logic/sumOfCategory";
+import sumOfPayments from "../../../helper functions/Logic/sumOfPayments";
 interface Props {
   arrayOfCategories1: Array<category>;
   arrayOfCategories2?: Array<category>;

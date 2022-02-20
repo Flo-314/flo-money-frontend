@@ -3,12 +3,12 @@ import {useContext} from "react";
 import {AiOutlineDollarCircle} from "react-icons/ai";
 import {Link as RouteLink} from "react-router-dom";
 
-import sumOfCategory from "../../helper functions/sumOfCategory";
-import {UserContext} from "../../helper functions/UserContext";
+import sumOfCategory from "../../helper functions/Logic/sumOfCategory";
+import {UserContext} from "../../helper functions/React Logic/UserContext";
 import HeaderPage from "../Reusable Components/layout/HeaderPage";
-import {user} from "../../helper functions/interfaces";
+import {user} from "../../helper functions/types/interfaces";
 import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";
-import sumOfPayments from "../../helper functions/sumOfPayments";
+import sumOfPayments from "../../helper functions/Logic/sumOfPayments";
 
 function Projections() {
   const user: user = useContext(UserContext);

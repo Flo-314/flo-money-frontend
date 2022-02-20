@@ -10,8 +10,8 @@ import {
   AiOutlineBank,
 } from "react-icons/ai";
 
-import {user} from "../../../../helper functions/interfaces";
-import {UserContext} from "../../../../helper functions/UserContext";
+import {user} from "../../../../helper functions/types/interfaces";
+import {UserContext} from "../../../../helper functions/React Logic/UserContext";
 
 function MobileHeader() {
   const user: user = useContext(UserContext);

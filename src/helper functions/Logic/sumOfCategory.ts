@@ -1,4 +1,5 @@
-import {category} from "./interfaces";
+import {category} from "../types/interfaces";
+
 import sumOfPayments from "./sumOfPayments";
 
 const sumOfCategory = (array: category[]) => {
