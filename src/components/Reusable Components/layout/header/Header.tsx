@@ -6,7 +6,11 @@ function Header() {
   return (
     <aside>
       <header>
-        <Box position="sticky" top={{lg: "0px", base: "-1px"}} width="100%">
+        <Box
+          position={{lg: "inherit", base: "fixed"}}
+          top={{lg: "-1px", base: "-1px"}}
+          width="100%"
+        >
           <Flex
             align={"center"}
             bg="bgSecondary"
