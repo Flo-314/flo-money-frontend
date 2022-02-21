@@ -25,7 +25,7 @@ function Projections() {
                 gap="10"
                 gridTemplateRows={{
                   lg: "1fr minmax(1px, 350px) 1fr",
-                  base: "minmax(1px, 100px) minmax(1px, 350px) 1fr minmax(1px, 350px)",
+                  base: "minmax(1px, 180px) minmax(1px, 350px) 1fr minmax(1px, 180px)",
                 }}
                 templateColumns={{base: "minmax(1px,325px)", sm: "1fr"}}
               >
@@ -37,13 +37,12 @@ function Projections() {
                       borderRadius={20}
                       direction={{sm: "row", base: "column"}}
                       justify="space-around"
-                      maxHeight="100%"
                       paddingY={5}
                     >
                       <Flex align="center" color="white" gap="3">
                         <AiOutlineDollarCircle size={50} />
                         <Text fontSize={30} fontWeight={500}>
-                          Mi saldo
+                          Salario Actual
                         </Text>
                       </Flex>
                       <Text color="white" fontSize={40} fontWeight="700">
@@ -52,6 +51,7 @@ function Projections() {
                     </Flex>
                   </Flex>
                 </GridItem>
+
                 <GridItem borderRadius={20}>
                   <Box
                     display={{lg: "flex", base: "block"}}
@@ -78,6 +78,7 @@ function Projections() {
                     </Box>
                   </Box>
                 </GridItem>
+
                 <GridItem display={{lg: "none", base: "inherit"}}>
                   <ListOfTransactions
                     category={user.data.projections[1]}
@@ -87,6 +88,7 @@ function Projections() {
                     title="Egresos estimados"
                   />
                 </GridItem>
+
                 <GridItem borderRadius={20}>
                   <Flex borderRadius={20} direction="column" gap="5" height="100%">
                     <Flex
