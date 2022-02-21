@@ -9,9 +9,19 @@ import HeaderPage from "../Reusable Components/layout/HeaderPage";
 import {user} from "../../helper functions/types/interfaces";
 import ListOfTransactions from "../Reusable Components/Parts of Components/ListOfTransactions";
 import sumOfPayments from "../../helper functions/Logic/sumOfPayments";
+import SalaryButton from "../Reusable Components/Parts of Components/SalaryButton";
 
 function Projections() {
   const user: user = useContext(UserContext);
+  let actualSalary, projectedSalary;
+
+  if (user?.data) {
+    actualSalary = sumOfCategory(user.data.incomes) - sumOfCategory(user.data.outcomes);
+    projectedSalary =
+      actualSalary -
+      sumOfPayments(user.data.projections[0]) -
+      sumOfPayments(user.data.projections[1]);
+  }
 
   return (
     <main>
@@ -25,31 +35,12 @@ function Projections() {
                 gap="10"
                 gridTemplateRows={{
                   lg: "1fr minmax(1px, 350px) 1fr",
-                  base: "minmax(1px, 180px) minmax(1px, 350px) 1fr minmax(1px, 180px)",
+                  base: "minmax(1px, 180px) minmax(1px, 350px) 1fr minmax(1px, 250px)",
                 }}
                 templateColumns={{base: "minmax(1px,325px)", sm: "1fr"}}
               >
                 <GridItem>
-                  <Flex borderRadius={20} direction="column" gap="5" height="100%">
-                    <Flex
-                      align={"center"}
-                      bg="primary"
-                      borderRadius={20}
-                      direction={{sm: "row", base: "column"}}
-                      justify="space-around"
-                      paddingY={5}
-                    >
-                      <Flex align="center" color="white" gap="3">
-                        <AiOutlineDollarCircle size={50} />
-                        <Text fontSize={30} fontWeight={500}>
-                          Salario Actual
-                        </Text>
-                      </Flex>
-                      <Text color="white" fontSize={40} fontWeight="700">
-                        ${sumOfCategory(user.data.incomes) - sumOfCategory(user.data.outcomes)}
-                      </Text>
-                    </Flex>
-                  </Flex>
+                  <SalaryButton color={"primary"} salary={actualSalary} title={"Saldo Actual"} />
                 </GridItem>
 
                 <GridItem borderRadius={20}>
@@ -90,31 +81,7 @@ function Projections() {
                 </GridItem>
 
                 <GridItem borderRadius={20}>
-                  <Flex borderRadius={20} direction="column" gap="5" height="100%">
-                    <Flex
-                      align={"center"}
-                      bg="red"
-                      borderRadius={20}
-                      direction={{sm: "row", base: "column"}}
-                      justify="space-around"
-                      paddingX=""
-                      paddingY={5}
-                    >
-                      <Flex align="center" color="white" gap="3">
-                        <AiOutlineDollarCircle size={50} />
-                        <Text fontSize={30} fontWeight={500}>
-                          Salario Esperado
-                        </Text>
-                      </Flex>
-                      <Text color="white" fontSize={40} fontWeight="700">
-                        $
-                        {sumOfCategory(user.data.incomes) -
-                          sumOfCategory(user.data.outcomes) +
-                          sumOfPayments(user.data.projections[0]) -
-                          sumOfPayments(user.data.projections[1])}
-                      </Text>
-                    </Flex>
-                  </Flex>
+                  <SalaryButton color={"red"} salary={projectedSalary} title={"Saldo Proyectado"} />
                 </GridItem>
               </Grid>
             )}

@@ -9,6 +9,7 @@ import HeaderPage from "../Reusable Components/layout/HeaderPage";
 import {UserContext} from "../../helper functions/React Logic/UserContext";
 import {user} from "../../helper functions/types/interfaces";
 import sumOfCategory from "../../helper functions/Logic/sumOfCategory";
+import SalaryButton from "../Reusable Components/Parts of Components/SalaryButton";
 function Home() {
   const user: user = useContext(UserContext);
 
@@ -30,27 +31,11 @@ function Home() {
                 }}
               >
                 <GridItem>
-                  <Flex borderRadius={20} direction="column" gap="5" height="100%">
-                    <Flex
-                      align={"center"}
-                      bg="primary"
-                      borderRadius={20}
-                      direction={{sm: "row", base: "column"}}
-                      justify="space-around"
-                      paddingX=""
-                      paddingY={5}
-                    >
-                      <Flex align="center" color="white" gap="3">
-                        <AiOutlineDollarCircle size={50} />
-                        <Text fontSize={30} fontWeight={500}>
-                          Mi saldo
-                        </Text>
-                      </Flex>
-                      <Text color="white" fontSize={40} fontWeight="700">
-                        ${sumOfCategory(user.data.incomes) - sumOfCategory(user.data.outcomes)}
-                      </Text>
-                    </Flex>
-                  </Flex>
+                  <SalaryButton
+                    color="primary"
+                    salary={sumOfCategory(user.data.incomes) - sumOfCategory(user.data.outcomes)}
+                    title="Mi Saldo"
+                  />
                 </GridItem>
 
                 <GridItem>
